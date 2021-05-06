@@ -13,7 +13,5 @@ public class Start {
     public static void main(String[] args) {
         var gameLoopManager = new GameLoopManager();
         gameLoopManager.startGame();
-
-
     }
 }
