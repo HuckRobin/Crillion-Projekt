@@ -8,6 +8,7 @@ import de.thd.graf.crillion.game.managers.GameLoopManager;
 public class Start {
     /**
      * Main method
+     * Peter
      * @param args
      */
     public static void main(String[] args) {
