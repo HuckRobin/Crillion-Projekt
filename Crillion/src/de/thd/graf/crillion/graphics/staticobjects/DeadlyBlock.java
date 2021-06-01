@@ -2,6 +2,7 @@ package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
@@ -21,7 +22,6 @@ public class DeadlyBlock extends BlockObjects {
     public DeadlyBlock(GameView gameView) {
         super(gameView);
         this.position = new Position(50, 250);
-        this.color = null;
         this.blockImage = "WWWWWWWWWBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBWBBBBBBWB" +
@@ -33,6 +33,16 @@ public class DeadlyBlock extends BlockObjects {
                 "\nWBBWBBBBWBB" +
                 "\nWBWBBBBBBWB" +
                 "\nWBBBBBBBBBB";
+    }
+
+    @Override
+    protected void updateHitBoxPosition() {
+
+    }
+
+    @Override
+    public void reactToCollision(CollidableGameObject otherObject) {
+
     }
 
     private void losesOneLifeWhenHit() {

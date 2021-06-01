@@ -2,6 +2,7 @@ package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 /**
@@ -28,6 +29,16 @@ public class WallBlock extends BlockObjects {
                 + "LLLLLLLLLLL\n"
                 + "WWWLWWWLWWW\n"
                 + "GGGLGGGLGGG\n";
+    }
+
+    @Override
+    protected void updateHitBoxPosition() {
+
+    }
+
+    @Override
+    public void reactToCollision(CollidableGameObject otherObject) {
+
     }
 
     /**

@@ -5,7 +5,7 @@ import de.thd.graf.crillion.gameview.GameView;
 /**
  * Superclass for the block objects
  */
-public abstract class BlockObjects extends GameObject {
+public abstract class BlockObjects extends CollidableGameObject {
 
     protected String blockImage;
 

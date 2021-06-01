@@ -1,13 +1,15 @@
 package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
+import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 /**
  * Block which changes the Ball color.
  */
-public class ColorChangingBlock extends GameObject {
+public class ColorChangingBlock extends BlockObjects {
 
     private String blockImage;
 
@@ -18,7 +20,6 @@ public class ColorChangingBlock extends GameObject {
     public ColorChangingBlock(GameView gameView) {
         super(gameView);
         this.position = new Position(50, 100);
-        this.color = null;
         this.blockImage = "WWWWWWWWWBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBWBBBBB" +
@@ -30,11 +31,16 @@ public class ColorChangingBlock extends GameObject {
                 "\nWBBBBWBBBBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB";
+    }
 
-        this.size = 2;
-        this.rotation = 0;
-        this.width = 10 * (int) size;
-        this.height = 10 * (int) size;
+    @Override
+    protected void updateHitBoxPosition() {
+
+    }
+
+    @Override
+    public void reactToCollision(CollidableGameObject otherObject) {
+
     }
 
     /**

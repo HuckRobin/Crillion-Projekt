@@ -1,15 +1,13 @@
 package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.GameObject;
-import de.thd.graf.crillion.graphics.basicobjects.MovingGameObject;
-import de.thd.graf.crillion.graphics.basicobjects.Position;
+import de.thd.graf.crillion.graphics.basicobjects.*;
 import de.thd.graf.crillion.graphics.staticobjects.Background;
 
 /**
  * Block which moves when it get hit by the {@link Ball} with the same Color
  */
-public class MoveableBlock extends GameObject implements MovingGameObject {
+public class MoveableBlock extends BlockObjects implements MovingGameObject {
 
     private String blockImage;
 
@@ -35,11 +33,16 @@ public class MoveableBlock extends GameObject implements MovingGameObject {
                 "WBBBBWBBBBB\n" +
                 "WBBBBBBBBBB\n" +
                 "WBBBBBBBBBB\n";
+    }
 
-        this.size = 2;
-        this.rotation = 0;
-        this.width = 10 * (int) size;
-        this.height = 10 * (int) size;
+    @Override
+    protected void updateHitBoxPosition() {
+
+    }
+
+    @Override
+    public void reactToCollision(CollidableGameObject otherObject) {
+
     }
 
     /**

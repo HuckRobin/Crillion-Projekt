@@ -2,6 +2,7 @@ package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 
@@ -35,6 +36,16 @@ public class VanishingBlock extends BlockObjects {
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB";
+
+    }
+
+    @Override
+    protected void updateHitBoxPosition() {
+
+    }
+
+    @Override
+    public void reactToCollision(CollidableGameObject otherObject) {
 
     }
 
