@@ -33,6 +33,7 @@ public class WallBlock extends BlockObjects {
 
     @Override
     protected void updateHitBoxPosition() {
+        super.updateHitBoxPosition();
 
     }
 
@@ -47,6 +48,7 @@ public class WallBlock extends BlockObjects {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
+        addHitBoxToCanvas();
     }
 
     /**

@@ -4,6 +4,8 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.*;
 import de.thd.graf.crillion.graphics.staticobjects.Background;
 
+import java.awt.*;
+
 /**
  * Block which moves when it get hit by the {@link Ball} with the same Color
  */
@@ -15,11 +17,12 @@ public class MoveableBlock extends BlockObjects implements MovingGameObject {
 
     /**
      * Create a MoveableBlock
+     *
      * @param gameView get important Code from GameView
      */
     public MoveableBlock(GameView gameView) {
         super(gameView);
-        this.position = new Position(50, 60);
+        this.position = new Position(50, 60 + 1);
         this.speedInPixel = 1;
         this.blockImage = "WWWWWWWWWBB\n" +
                 "WBBBBBBBBBB\n" +
@@ -31,18 +34,23 @@ public class MoveableBlock extends BlockObjects implements MovingGameObject {
                 "WBBBBWBBBBB\n" +
                 "WBBBBWBBBBB\n" +
                 "WBBBBWBBBBB\n" +
-                "WBBBBBBBBBB\n" +
                 "WBBBBBBBBBB\n";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void updateHitBoxPosition() {
-
+        super.updateHitBoxPosition();
     }
 
+    /**
+     * {@inheritDoc}
+     * @param otherObject The other GameObject that is involved in the collision.
+     */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
     }
 
     /**
@@ -51,6 +59,7 @@ public class MoveableBlock extends BlockObjects implements MovingGameObject {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
+        addHitBoxToCanvas();
     }
 
     /**

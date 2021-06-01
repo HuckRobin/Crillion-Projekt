@@ -6,6 +6,7 @@ import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -34,14 +35,13 @@ public class VanishingBlock extends BlockObjects {
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
-                "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB";
 
     }
 
     @Override
     protected void updateHitBoxPosition() {
-
+        super.updateHitBoxPosition();
     }
 
     @Override
@@ -58,6 +58,7 @@ public class VanishingBlock extends BlockObjects {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
+        addHitBoxToCanvas();
     }
 
     @Override

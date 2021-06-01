@@ -37,6 +37,7 @@ public class DeadlyBlock extends BlockObjects {
 
     @Override
     protected void updateHitBoxPosition() {
+        super.updateHitBoxPosition();
 
     }
 
@@ -57,6 +58,7 @@ public class DeadlyBlock extends BlockObjects {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
+        addHitBoxToCanvas();
     }
 
     /**

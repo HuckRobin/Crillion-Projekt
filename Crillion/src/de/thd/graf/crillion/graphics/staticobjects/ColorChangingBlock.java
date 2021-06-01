@@ -35,7 +35,7 @@ public class ColorChangingBlock extends BlockObjects {
 
     @Override
     protected void updateHitBoxPosition() {
-
+        super.updateHitBoxPosition();
     }
 
     @Override
@@ -49,6 +49,7 @@ public class ColorChangingBlock extends BlockObjects {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
+        addHitBoxToCanvas();
     }
 
     /**
