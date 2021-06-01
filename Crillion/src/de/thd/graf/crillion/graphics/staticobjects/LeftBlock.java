@@ -7,30 +7,30 @@ import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 
 import java.awt.*;
 
-class LeftBlocks extends ScoreObjects {
+class LeftBlock extends ScoreObjects {
 
     /**
      * Create the Level object
+     *
      * @param gameView get important Code from GameView
      */
-    public LeftBlocks (GameView gameView){
+    public LeftBlock(GameView gameView) {
         super(gameView);
-        this.position = new Position(GameView.WIDTH  - 200, GameView.HEIGHT - GameView.HEIGHT + 40);
-        this.name = "Level";
-        this.score = 0;
-        this.size = 30;
-        this.color = Color.WHITE;
-        this.rotation = 0;
+        this.position = new Position(300, 30);
+        this.score = 9;
+        this.name = "LeftBlocks:" + this.score;
     }
 
-    private void addPointsToScore(){}
+    private void addPointsToScore() {
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void addToCanvas() {
-        gameView.addTextToCanvas(this.name, this.position.x, this.position.y,this.size, this.color, this.rotation);
+        gameView.addTextToCanvas(this.name, this.position.x, this.position.y, this.size,
+                this.color, this.rotation);
     }
 
     /**
@@ -38,6 +38,5 @@ class LeftBlocks extends ScoreObjects {
      */
     @Override
     public void updateStatus() {
-
     }
 }

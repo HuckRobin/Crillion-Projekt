@@ -14,12 +14,9 @@ class Lives extends ScoreObjects {
      */
     public Lives(GameView gameView){
         super(gameView);
-        this.position = new Position(GameView.WIDTH  - 200, GameView.HEIGHT - GameView.HEIGHT + 40);
-        this.name = "Level";
-        this.score = 0;
-        this.size = 30;
-        this.color = Color.WHITE;
-        this.rotation = 0;
+        this.position = new Position(300, 0);
+        this.score = 5;
+        this.name = "Lives:";
     }
 
     private void addPointsToScore(){}
@@ -30,6 +27,10 @@ class Lives extends ScoreObjects {
     @Override
     public void addToCanvas() {
         gameView.addTextToCanvas(this.name, this.position.x, this.position.y,this.size, this.color, this.rotation);
+        for (int i = 0; i < score; i++) {
+            gameView.addImageToCanvas("Heart.png", (position.x + this.name.length() * this.size)
+                    + i * 35, this.position.y, 0.4, rotation);
+        }
     }
 
     /**

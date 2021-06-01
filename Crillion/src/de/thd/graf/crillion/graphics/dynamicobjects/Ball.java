@@ -1,4 +1,4 @@
-package de.thd.graf.crillion.graphics.staticobjects;
+package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.Position;

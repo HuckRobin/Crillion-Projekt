@@ -18,12 +18,9 @@ public class Score extends ScoreObjects {
      */
     public Score(GameView gameView){
         super(gameView);
-        this.position = new Position(GameView.WIDTH  - 200, GameView.HEIGHT - GameView.HEIGHT + 40);
-        this.name = "Score";
+        this.position = new Position(GameView.WIDTH, 0);
         this.score = 0;
-        this.size = 30;
-        this.color = Color.WHITE;
-        this.rotation = 0;
+        this.name = "Score:" + this.score;
     }
 
     private void addPointsToScore(){}
@@ -33,7 +30,8 @@ public class Score extends ScoreObjects {
      */
     @Override
     public void addToCanvas() {
-        gameView.addTextToCanvas(this.name, this.position.x, this.position.y,this.size, this.color, this.rotation);
+        gameView.addTextToCanvas(this.name, this.position.x - this.name.length() * this.size, this.position.y,
+                this.size, this.color, this.rotation);
     }
 
     /**

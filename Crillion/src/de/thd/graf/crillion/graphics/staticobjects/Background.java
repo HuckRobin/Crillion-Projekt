@@ -18,11 +18,11 @@ public class Background extends GameObject {
      */
     public Background(GameView gameView) {
         super(gameView);
-        this.position = new Position(0,0);
+        this.position = new Position(0,50);
         this.color = new Color(7, 85, 8);
         this.size = 1;
         this.width = GameView.WIDTH * (int)size;
-        this.height = GameView.HEIGHT * (int)size;
+        this.height = (GameView.HEIGHT - 50) * (int)size;
         this.lineWeight = 1;
     }
 
@@ -31,9 +31,9 @@ public class Background extends GameObject {
      */
     @Override
     public void addToCanvas(){
-
         this.gameView.addRectangleToCanvas(this.position.x, this.position.y,this.width, this.height,this.lineWeight,
                 true, this.color);
+        this.addBoundary();
     }
 
     /**
@@ -41,6 +41,16 @@ public class Background extends GameObject {
      */
     @Override
     public void updateStatus() {
+    }
 
+    private void addBoundary(){
+        //Top
+        gameView.addRectangleToCanvas(0, 50,GameView.WIDTH,10,1,true, Color.red);
+        //Left
+        gameView.addRectangleToCanvas(0,50,10,GameView.HEIGHT,1,true,Color.red);
+        //Bottom
+        gameView.addRectangleToCanvas(0,GameView.HEIGHT - 10,GameView.WIDTH,10,1,true,Color.red);
+        //Right
+        gameView.addRectangleToCanvas(GameView.WIDTH - 10,50,10,GameView.HEIGHT,1,true,Color.red);
     }
 }

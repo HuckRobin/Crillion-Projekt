@@ -5,6 +5,8 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.dynamicobjects.BlockExplosion;
 import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
+import de.thd.graf.crillion.graphics.staticobjects.Level;
+import de.thd.graf.crillion.graphics.staticobjects.Scoreboard;
 
 import java.util.Random;
 
@@ -59,6 +61,9 @@ public class GamePlayManager {
            this.gameObjectManager.getVanishingBlocks().clear();
            this.listHasBeenDeleted = true;
         }
+    }
+
+    private void updateLevel(){
     }
 
     /**

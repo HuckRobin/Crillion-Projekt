@@ -1,16 +1,16 @@
 package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
+import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
-import de.thd.graf.crillion.graphics.staticobjects.Ball;
 
 import java.util.Random;
 
 /**
  * A block which vanish when it get hit by the {@link Ball}
  */
-public class VanishingBlock extends GameObject {
+public class VanishingBlock extends BlockObjects {
 
     private String blockImage;
     private Random random;
@@ -22,8 +22,7 @@ public class VanishingBlock extends GameObject {
     public VanishingBlock(GameView gameView) {
         super(gameView);
         this.random = new Random();
-        this.position = new Position(random.nextInt(GameView.WIDTH), random.nextInt(GameView.HEIGHT));
-        this.color = null;
+        this.position = new Position(10 + random.nextInt(GameView.WIDTH - this.width - 10), 60 + random.nextInt(GameView.HEIGHT - 60 - this.height - 10));
         this.blockImage = "WWWWWWWWWBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
@@ -36,12 +35,6 @@ public class VanishingBlock extends GameObject {
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB";
-
-        this.size = 2;
-        this.rotation = 0;
-        this.width = 10 * (int) size;
-        this.height = 10 * (int) size;
-
 
     }
 

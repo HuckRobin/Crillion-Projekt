@@ -68,7 +68,7 @@ public class BlockExplosion extends GameObject implements MovingGameObject {
     }
 
     private void destroyShotIfItHasLeftTheScreen() {
-        if (this.position.y > GameView.HEIGHT) {
+        if (this.position.y > GameView.HEIGHT - this.height - 30) {
             gamePlayManager.destroy(this);
         }
     }

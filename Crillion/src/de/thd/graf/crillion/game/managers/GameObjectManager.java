@@ -1,9 +1,9 @@
 package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
-import de.thd.graf.crillion.graphics.basicobjects.MovingGameObject;
+import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
 import de.thd.graf.crillion.graphics.dynamicobjects.BlockExplosion;
+import de.thd.graf.crillion.graphics.dynamicobjects.MoveableBlock;
 import de.thd.graf.crillion.graphics.staticobjects.Background;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.staticobjects.*;
@@ -27,12 +27,12 @@ class GameObjectManager {
     private final DeadlyBlock deadlyBlock;
     private final MoveableBlock moveableBlock;
     private final WallBlock wallBlock;
+    private final Scoreboard scoreboard;
 
     private final LinkedList<VanishingBlock> vanishingBlocks;
     private final LinkedList<GameObject> gameObjects;
     private final LinkedList<Scoreboard> scoreboards;
     private final LinkedList<BlockExplosion> blockExplosions;
-    //private final Score score;
 
     /**
      * Create the GameObjectManager
@@ -47,12 +47,13 @@ class GameObjectManager {
         this.deadlyBlock = new DeadlyBlock(gameView);
         this.moveableBlock = new MoveableBlock(gameView);
         this.wallBlock = new WallBlock(gameView);
+        this.scoreboard = new Scoreboard(gameView);
 
         this.vanishingBlocks = new LinkedList<>();
         this.blockExplosions = new LinkedList<>();
 
         this.gameObjects = new LinkedList<>();
-        this.scoreboards = new LinkedList<>();
+        this.scoreboards = new LinkedList<>(List.of(scoreboard));
     }
 
     /**
@@ -62,6 +63,7 @@ class GameObjectManager {
 
         gameObjects.clear();
         gameObjects.add(background);
+        gameObjects.addAll(scoreboards);
         gameObjects.addAll(vanishingBlocks);
         gameObjects.addAll(List.of(colorChangingBlock, deadlyBlock, moveableBlock, wallBlock, ball));
         gameObjects.addAll(blockExplosions);
@@ -98,4 +100,11 @@ class GameObjectManager {
     public LinkedList<BlockExplosion> getBlockExplosions() {
         return blockExplosions;
     }
+
+    /**
+     * Return the Linked List of scoreboard
+     * @return LinkedList<Scoreboard>
+     */
+    public LinkedList<Scoreboard> getScoreboards() {return scoreboards;}
+
 }

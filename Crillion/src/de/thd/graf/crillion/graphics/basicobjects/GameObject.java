@@ -30,11 +30,6 @@ public abstract class GameObject {
         this.position = new Position(0, 0);
     }
 
-   ///**
-   // * Update the Position of the Object
-   // */
-   //public abstract void updatePosition();
-
     /**
      * Add the object or a image to the canvas
      */

@@ -1,7 +1,7 @@
 package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.staticobjects.Ball;
+import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
 
 import java.awt.event.KeyEvent;
 

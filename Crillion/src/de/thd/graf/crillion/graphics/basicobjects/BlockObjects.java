@@ -18,7 +18,7 @@ public abstract class BlockObjects extends GameObject {
         super(gameView);
         this.size = 2;
         this.rotation = 0;
-        this.width = 10 * (int) size;
-        this.height = 10 * (int) size;
+        this.width = 11 * (int) size;
+        this.height = 11 * (int) size;
     }
 }

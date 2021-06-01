@@ -17,21 +17,17 @@ public class WallBlock extends BlockObjects {
     public WallBlock(GameView gameView) {
         super(gameView);
         this.position = new Position(50, 150);
-        this.blockImage = "WWWWWWWSWWW\n"
-                + "GGGGGGGSGGG\n"
-                + "SSSSSSSSSSS\n"
-                + "WWWSWWWWSWW\n"
-                + "GGGSGGGGSGG\n"
-                + "SSSSSSSSSSS\n"
-                + "WWWWWSWWWWW\n"
-                + "GGGGGSGGGGG\n"
-                + "SSSSSSSSSSS\n"
-                + "WWWSWWWSWWW\n"
-                + "GGGSGGGSGGG\n";
-        this.size = 2;
-        this.rotation = 0;
-        this.width = 10 * (int) size;
-        this.height = 10 * (int) size;
+        this.blockImage = "WWWWWWWLWWW\n"
+                + "GGGGGGGLGGG\n"
+                + "LLLLLLLLLLL\n"
+                + "WWWLWWWWLWW\n"
+                + "GGGLGGGGLGG\n"
+                + "LLLLLLLLLLL\n"
+                + "WWWWWLWWWWW\n"
+                + "GGGGGLGGGGG\n"
+                + "LLLLLLLLLLL\n"
+                + "WWWLWWWLWWW\n"
+                + "GGGLGGGLGGG\n";
     }
 
     /**

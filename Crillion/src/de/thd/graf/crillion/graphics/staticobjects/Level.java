@@ -7,7 +7,10 @@ import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 
 import java.awt.*;
 
-class Level extends ScoreObjects {
+/**
+ * Class which indicates the level in which is the player
+ */
+public class Level extends ScoreObjects {
 
  /**
   * Create the Level object
@@ -15,16 +18,10 @@ class Level extends ScoreObjects {
   */
  public Level(GameView gameView){
   super(gameView);
-  this.position = new Position(GameView.WIDTH  - 200, GameView.HEIGHT - GameView.HEIGHT + 40);
-  this.name = "Level";
+  this.position = new Position(0, 0);
   this.score = 0;
-  this.size = 30;
-  this.color = Color.WHITE;
-  this.rotation = 0;
+  this.name = "Level:" + this.score;
  }
-
-
- private void addPointsToScore(){}
 
  /**
   * {@inheritDoc}
@@ -39,6 +36,6 @@ class Level extends ScoreObjects {
   */
  @Override
  public void updateStatus() {
-
  }
+
 }

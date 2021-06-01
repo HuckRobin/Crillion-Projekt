@@ -1,13 +1,15 @@
 package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
+import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
+import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
 
 /**
  * Block which remove 1 Life when it get hit by the {@link Ball}
  */
-public class DeadlyBlock extends GameObject {
+public class DeadlyBlock extends BlockObjects {
 
     private String blockImage;
 
@@ -31,11 +33,6 @@ public class DeadlyBlock extends GameObject {
                 "\nWBBWBBBBWBB" +
                 "\nWBWBBBBBBWB" +
                 "\nWBBBBBBBBBB";
-
-        this.size = 2;
-        this.rotation = 0;
-        this.width = 10 * (int) size;
-        this.height = 10 * (int) size;
     }
 
     private void losesOneLifeWhenHit() {
