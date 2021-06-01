@@ -15,7 +15,7 @@ public abstract class BoundaryObjects extends CollidableGameObject {
         this.frame = new Rectangle((int) this.position.x,(int) this.position.y,this.width,this.height);
         this.lineWeight = 1;
         this.filled = true;
-        this.color = Color.RED;
+        this.color = Color.WHITE;
     }
 
     /**
@@ -33,6 +33,6 @@ public abstract class BoundaryObjects extends CollidableGameObject {
      * Adds the hit box frame to the objects
      */
     protected void addHitBoxToCanvas(){
-        gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.WHITE);
+        gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
     }
 }
