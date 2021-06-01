@@ -22,7 +22,7 @@ public class VanishingBlock extends BlockObjects {
     public VanishingBlock(GameView gameView) {
         super(gameView);
         this.random = new Random();
-        this.position = new Position(10 + random.nextInt(GameView.WIDTH - this.width - 10), 60 + random.nextInt(GameView.HEIGHT - 60 - this.height - 10));
+        this.position = new Position(10 + random.nextInt(GameView.WIDTH - this.width - 10 - 10), 60 + random.nextInt(GameView.HEIGHT - 60 - this.height - 10));
         this.blockImage = "WWWWWWWWWBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
