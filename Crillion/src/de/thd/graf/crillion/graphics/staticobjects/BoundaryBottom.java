@@ -56,6 +56,6 @@ public class BoundaryBottom extends BoundaryObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
+        System.out.println("Hit_Bottom");
     }
 }

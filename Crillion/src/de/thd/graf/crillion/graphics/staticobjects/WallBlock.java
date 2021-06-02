@@ -45,7 +45,7 @@ public class WallBlock extends BlockObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
+        System.out.println("Hit_Wallblock");
     }
 
     /**

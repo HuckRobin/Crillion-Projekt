@@ -46,7 +46,7 @@ public class ColorChangingBlock extends BlockObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
+        System.out.println("Hit_ColorChangingBlock");
     }
 
     /**

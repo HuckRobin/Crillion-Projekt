@@ -50,5 +50,6 @@ public class BoundaryLeft extends CollidableGameObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
+        System.out.println("Hit_Left");
     }
 }

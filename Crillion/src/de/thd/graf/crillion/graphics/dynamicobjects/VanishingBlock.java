@@ -52,7 +52,7 @@ public class VanishingBlock extends BlockObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        System.out.println("Hallo");
+        System.out.println("Hit_Vanishingblock");
     }
 
     private void vanishTheBlockWhenHit() {

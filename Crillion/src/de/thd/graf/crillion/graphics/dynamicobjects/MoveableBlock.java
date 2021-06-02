@@ -51,7 +51,7 @@ public class MoveableBlock extends BlockObjects implements MovingGameObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        System.out.println("Drei");
+        System.out.println("Hit_MovableBlock");
     }
 
     /**
