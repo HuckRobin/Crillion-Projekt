@@ -33,11 +33,17 @@ public class ColorChangingBlock extends BlockObjects {
                 "\nWBBBBBBBBBB";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void updateHitBoxPosition() {
         super.updateHitBoxPosition();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
 

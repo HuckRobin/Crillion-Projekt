@@ -31,12 +31,18 @@ public class WallBlock extends BlockObjects {
                 + "GGGLGGGLGGG\n";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void updateHitBoxPosition() {
         super.updateHitBoxPosition();
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
 

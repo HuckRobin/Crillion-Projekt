@@ -14,22 +14,34 @@ public class BoundaryLeft extends BoundaryObjects {
         this.height = GameView.HEIGHT;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateHitBoxPosition(){
         super.updateHitBoxPosition();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addToCanvas() {
         gameView.addRectangleToCanvas(this.position.x, this.position.y, this.width, this.height, this.lineWeight, this.filled, this.color);
         addHitBoxToCanvas();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void updateStatus() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
 

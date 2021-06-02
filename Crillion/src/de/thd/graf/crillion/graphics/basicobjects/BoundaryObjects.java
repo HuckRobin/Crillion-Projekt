@@ -4,12 +4,19 @@ import de.thd.graf.crillion.gameview.GameView;
 
 import java.awt.*;
 
+/**
+ * Upper class for the playing field limitation
+ */
 public abstract class BoundaryObjects extends CollidableGameObject {
 
     protected Rectangle frame;
     protected int lineWeight;
     protected boolean filled;
 
+    /**
+     * Creat the frame for the limitation
+     * @param gameView get the gamneview
+     */
     public BoundaryObjects (GameView gameView){
         super(gameView);
         this.frame = new Rectangle((int) this.position.x,(int) this.position.y,this.width,this.height);

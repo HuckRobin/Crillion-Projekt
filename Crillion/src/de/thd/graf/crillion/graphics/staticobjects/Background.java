@@ -44,6 +44,10 @@ public class Background extends CollidableGameObject {
         this.boundaryRight.updateHitBoxPosition();
     }
 
+    /**
+     * {@inheritDoc}
+     * @param otherObject The other GameObject that is involved in the collision.
+     */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
 

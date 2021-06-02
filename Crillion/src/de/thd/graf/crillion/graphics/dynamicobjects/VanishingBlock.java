@@ -39,11 +39,17 @@ public class VanishingBlock extends BlockObjects {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void updateHitBoxPosition() {
         super.updateHitBoxPosition();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
 
@@ -61,6 +67,9 @@ public class VanishingBlock extends BlockObjects {
         addHitBoxToCanvas();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateStatus() {
     }
