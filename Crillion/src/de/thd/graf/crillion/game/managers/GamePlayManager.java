@@ -64,7 +64,13 @@ public class GamePlayManager {
         }
     }
 
-    private void updateLevel() {
+    /**
+     * Removes an vanishingBlock from the list of game objects, so it will be not be displayed on the window anymore.
+     *
+     * @param vanishingBlock Object to be removed from the window.
+     */
+    public void destroy(VanishingBlock vanishingBlock) {
+        gameObjectManager.getVanishingBlocks().remove(vanishingBlock);
     }
 }
 

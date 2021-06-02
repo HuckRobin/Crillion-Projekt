@@ -64,7 +64,7 @@ class GameObjectManager {
         this.collidableGameObjects = new ArrayList<>();
 
 
-        collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight, colorChangingBlock, deadlyBlock, moveableBlock, wallBlock));
+        this.collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight, colorChangingBlock, deadlyBlock, moveableBlock, wallBlock));
         this.ball = new Ball(gameView, collidableGameObjects);
     }
 

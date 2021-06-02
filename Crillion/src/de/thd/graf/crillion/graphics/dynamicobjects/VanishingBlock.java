@@ -53,6 +53,7 @@ public class VanishingBlock extends BlockObjects {
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
         System.out.println("Hit_Vanishingblock");
+        this.gamePlayManager.destroy(this);
     }
 
     private void vanishTheBlockWhenHit() {

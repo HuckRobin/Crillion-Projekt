@@ -32,10 +32,4 @@ public abstract class BoundaryObjects extends CollidableGameObject {
         this.hitBox.x = (int) this.position.x;
         this.hitBox.y = (int) this.position.y;
     }
-
-    /**
-     * Adds the hit box frame to the objects
-     */
-    protected void addHitBoxToCanvas(){
-    }
 }
