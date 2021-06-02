@@ -48,7 +48,6 @@ public class BoundaryBottom extends BoundaryObjects {
      */
     @Override
     protected void updateStatus() {
-
     }
 
     /**

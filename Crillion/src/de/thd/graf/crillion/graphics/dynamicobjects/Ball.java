@@ -55,7 +55,6 @@ public class Ball extends CollidingGameObject {
         this.height = 11 * (int) size;
         this.hitBox.width = (int) (this.width - 1 * size);
         this.hitBox.height = (int) (this.height - 1 * size);
-        this.boundaryLeft = (BoundaryLeft) objectsToCollideWith.get(1);
     }
 
     /**
@@ -72,21 +71,14 @@ public class Ball extends CollidingGameObject {
      * @param otherObject The other GameObject that is involved in the collision.
      */
     @Override
-    public void reactToCollision(CollidableGameObject otherObject){    }
+    public void reactToCollision(CollidableGameObject otherObject){
+    }
 
     /**
      * Move PlayerObject to the left
      */
     public void left() {
-        updateHitBoxPosition();
-        if(collidesWith(this.boundaryLeft)){
-            this.position.right(this.speedInPixel);
-            System.out.println("Hit");
-        }
-        else{
-            updateHitBoxPosition();
-            this.position.left(speedInPixel);
-        }
+       this.position.left(speedInPixel);
     }
 
     /**

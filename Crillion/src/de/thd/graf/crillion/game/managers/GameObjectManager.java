@@ -62,7 +62,6 @@ class GameObjectManager {
 
 
         ArrayList<CollidableGameObject> collidableGameObjects = new ArrayList<>();
-        collidableGameObjects.addAll(vanishingBlocks);
         collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight, colorChangingBlock, deadlyBlock, moveableBlock, wallBlock));
         this.ball = new Ball(gameView, collidableGameObjects);
     }
@@ -76,6 +75,7 @@ class GameObjectManager {
         gameObjects.add(background);
         gameObjects.addAll(scoreboards);
         gameObjects.addAll(vanishingBlocks);
+        gameObjects.addAll(List.of(boundaryBottom, boundaryTop, boundaryRight, boundaryLeft));
         gameObjects.addAll(List.of(colorChangingBlock, deadlyBlock, moveableBlock, wallBlock, ball));
 
         for (GameObject gameObject : gameObjects) {

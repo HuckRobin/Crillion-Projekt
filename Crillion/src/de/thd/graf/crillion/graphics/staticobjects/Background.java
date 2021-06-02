@@ -13,11 +13,6 @@ import java.awt.*;
 public class Background extends CollidableGameObject {
 
     private double lineWeight;
-    private final BoundaryTop boundaryTop;
-    private final BoundaryLeft boundaryLeft;
-    private final BoundaryBottom boundaryBottom;
-    private final BoundaryRight boundaryRight;
-
     /**
      * Creat the background with the boundary
      */
@@ -29,19 +24,10 @@ public class Background extends CollidableGameObject {
         this.width = GameView.WIDTH * (int)size;
         this.height = (GameView.HEIGHT - 50) * (int)size;
         this.lineWeight = 1;
-
-        this.boundaryTop = new BoundaryTop(gameView);
-        this.boundaryLeft = new BoundaryLeft(gameView);
-        this.boundaryBottom = new BoundaryBottom(gameView);
-        this.boundaryRight = new BoundaryRight(gameView);
     }
 
     @Override
     protected void updateHitBoxPosition() {
-        this.boundaryTop.updateHitBoxPosition();
-        this.boundaryLeft.updateHitBoxPosition();
-        this.boundaryBottom.updateHitBoxPosition();
-        this.boundaryRight.updateHitBoxPosition();
     }
 
     /**
@@ -50,7 +36,6 @@ public class Background extends CollidableGameObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
     }
 
     /**
@@ -60,10 +45,6 @@ public class Background extends CollidableGameObject {
     public void addToCanvas(){
         this.gameView.addRectangleToCanvas(this.position.x, this.position.y,this.width, this.height,this.lineWeight,
                 true, this.color);
-        this.boundaryTop.addToCanvas();
-        this.boundaryLeft.addToCanvas();
-        this.boundaryBottom.addToCanvas();
-        this.boundaryRight.addToCanvas();
     }
 
     /**

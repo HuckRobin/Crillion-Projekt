@@ -7,7 +7,7 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
 
-public class BoundaryLeft extends CollidableGameObject {
+public class BoundaryLeft extends BoundaryObjects {
 
     public BoundaryLeft(GameView gameView){
         super(gameView);
@@ -24,8 +24,7 @@ public class BoundaryLeft extends CollidableGameObject {
      */
     @Override
     public void updateHitBoxPosition(){
-        this.hitBox.x = (int) this.position.x;
-        this.hitBox.y = (int) this.position.y;
+        super.updateHitBoxPosition();
     }
 
     /**

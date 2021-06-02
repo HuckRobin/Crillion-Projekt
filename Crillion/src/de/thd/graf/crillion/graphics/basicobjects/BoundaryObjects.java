@@ -17,7 +17,7 @@ public abstract class BoundaryObjects extends CollidableGameObject {
      * Creat the frame for the limitation
      * @param gameView get the gamneview
      */
-    public BoundaryObjects (GameView gameView){
+    protected BoundaryObjects (GameView gameView){
         super(gameView);
         this.lineWeight = 1;
         this.filled = true;
