@@ -5,13 +5,18 @@ import de.thd.graf.crillion.graphics.basicobjects.BoundaryObjects;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
-public class BoundaryLeft extends BoundaryObjects {
+import java.awt.*;
+
+public class BoundaryLeft extends CollidableGameObject {
 
     public BoundaryLeft(GameView gameView){
         super(gameView);
         this.position = new Position(0 ,50);
         this.width = 10;
         this.height = GameView.HEIGHT;
+
+        this.hitBox.width = this.width;
+        this.hitBox.height = this.height;
     }
 
     /**
@@ -19,7 +24,8 @@ public class BoundaryLeft extends BoundaryObjects {
      */
     @Override
     public void updateHitBoxPosition(){
-        super.updateHitBoxPosition();
+        this.hitBox.x = (int) this.position.x;
+        this.hitBox.y = (int) this.position.y;
     }
 
     /**
@@ -27,8 +33,8 @@ public class BoundaryLeft extends BoundaryObjects {
      */
     @Override
     public void addToCanvas() {
-        gameView.addRectangleToCanvas(this.position.x, this.position.y, this.width, this.height, this.lineWeight, this.filled, this.color);
-        addHitBoxToCanvas();
+        gameView.addRectangleToCanvas(this.position.x, this.position.y, this.width, this.height, 1, true, Color.WHITE);
+        gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
     }
 
     /**
@@ -44,6 +50,5 @@ public class BoundaryLeft extends BoundaryObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
     }
 }

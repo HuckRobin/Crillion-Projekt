@@ -22,7 +22,8 @@ public abstract class BlockObjects extends CollidableGameObject {
         this.rotation = 0;
         this.width = 11 * (int) size;
         this.height = 11 * (int) size;
-        this.hitBox = new Rectangle((int) this.position.x, (int) this.position.y, this.width, this.height);
+        this.hitBox.width = this.width;
+        this.hitBox.height = this.height;
     }
 
     /**

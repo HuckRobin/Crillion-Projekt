@@ -53,7 +53,9 @@ public class Ball extends CollidingGameObject {
         this.size = 1;
         this.width = 11 * (int) size;
         this.height = 11 * (int) size;
-        this.hitBox = new Rectangle((int) this.position.x, (int) this.position.y, this.width - 1, this.height - 1);
+        this.hitBox.width = (int) (this.width - 1 * size);
+        this.hitBox.height = (int) (this.height - 1 * size);
+        this.boundaryLeft = (BoundaryLeft) objectsToCollideWith.get(1);
     }
 
     /**
@@ -61,8 +63,8 @@ public class Ball extends CollidingGameObject {
      */
     @Override
     protected void updateHitBoxPosition() {
-        this.hitBox.x = (int) this.position.x + 3;
-        this.hitBox.y = (int) this.position.y + 3;
+        this.hitBox.x = (int) (this.position.x + 3 * size);
+        this.hitBox.y = (int) (this.position.y + 3 * size);
     }
 
     /**
@@ -76,7 +78,15 @@ public class Ball extends CollidingGameObject {
      * Move PlayerObject to the left
      */
     public void left() {
-        this.position.left(this.speedInPixel);
+        updateHitBoxPosition();
+        if(collidesWith(this.boundaryLeft)){
+            this.position.right(this.speedInPixel);
+            System.out.println("Hit");
+        }
+        else{
+            updateHitBoxPosition();
+            this.position.left(speedInPixel);
+        }
     }
 
     /**
@@ -133,17 +143,6 @@ public class Ball extends CollidingGameObject {
      * Updates the position of the ball so that the ball is constantly moving
      */
     public void updatePositition(){
-        if (this.position.x == GameView.WIDTH - this.hitBox.width - 10) {
-            changeDirection = false;
-        } else if (this.position.x == GameView.WIDTH - GameView.WIDTH + 10) {
-            changeDirection = true;
-        }
-
-        if (changeDirection == true) {
-            this.position.right(this.speedInPixel);
-        } else {
-            this.position.left(this.speedInPixel);
-        }
     }
 
     /**

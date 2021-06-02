@@ -5,6 +5,8 @@ import de.thd.graf.crillion.graphics.basicobjects.BoundaryObjects;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
+import java.awt.*;
+
 /**
  * Bottom limitation of the playing field
  */
@@ -19,6 +21,9 @@ public class BoundaryBottom extends BoundaryObjects {
         this.position = new Position(0 ,GameView.HEIGHT - 10);
         this.width = GameView.WIDTH;
         this.height = 10;
+
+        this.hitBox.width = this.width;
+        this.hitBox.height = this.height;
     }
 
     /**
@@ -35,7 +40,7 @@ public class BoundaryBottom extends BoundaryObjects {
     @Override
     public void addToCanvas() {
         gameView.addRectangleToCanvas(this.position.x, this.position.y, this.width, this.height, this.lineWeight, this.filled, this.color);
-        addHitBoxToCanvas();
+        gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
     }
 
     /**
