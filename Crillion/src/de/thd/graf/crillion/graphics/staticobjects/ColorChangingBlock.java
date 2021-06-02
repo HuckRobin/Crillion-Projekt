@@ -100,8 +100,8 @@ public class ColorChangingBlock extends BlockObjects implements Cloneable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        ColorChangingBlock colorBlock = (ColorChangingBlock) o;
-        return color == colorBlock.color;
+        ColorChangingBlock colorChangingBlock = (ColorChangingBlock) o;
+        return color == colorChangingBlock.color;
     }
 
     /**
