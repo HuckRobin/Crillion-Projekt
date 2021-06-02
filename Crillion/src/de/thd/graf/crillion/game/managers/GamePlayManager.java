@@ -44,13 +44,14 @@ public class GamePlayManager {
      * Spawn and destroys the vanishing block after a certain time
      */
     public void spawnAndDestroyVanishingblock() {
-        //LinkedList<VanishingBlock> vanishingBlocks = gameObjectManager.getVanishingBlocks();
+        LinkedList<VanishingBlock> vanishingBlocks = gameObjectManager.getVanishingBlocks();
 
         if (gameView.timerExpired("Spawn", "vanishingBlock")) {
             gameView.setTimer("Spawn", "vanishingBlock", 1000);
             VanishingBlock vanishingBlock = new VanishingBlock(gameView);
             vanishingBlock.setGamePlayManager(this);
             this.gameObjectManager.getVanishingBlocks().add(vanishingBlock);
+            this.gameObjectManager.getCollidableGameObjects().addAll(vanishingBlocks);
         }
         if (!this.gameObjectManager.getVanishingBlocks().isEmpty() && gameView.timerExpired("Destroy", "vanishingBlock")) {
             gameView.setTimer("Destroy", "vanishingBlock", 5000);

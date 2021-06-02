@@ -1,9 +1,11 @@
 package de.thd.graf.crillion.graphics.basicobjects;
 
+import java.util.Objects;
+
 /**
  * Position for the game objects
  */
-public class Position {
+public class Position implements Cloneable {
 
     /**
      * Initial x is the position x
@@ -102,5 +104,31 @@ public class Position {
     @Override
     public String toString() {
         return "Position (" + (int) Math.round(this.x) + ", " + (int) Math.round(this.y) + ")";
+    }
+
+
+    @Override
+    public Position clone() {
+        Position clone = null;
+        try {
+            clone = (Position) super.clone();
+        } catch (CloneNotSupportedException ignored) {
+        }
+        return clone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Position position = (Position) o;
+        return x == position.x && y == position.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

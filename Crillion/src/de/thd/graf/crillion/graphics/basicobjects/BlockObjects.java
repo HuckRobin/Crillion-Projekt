@@ -3,11 +3,12 @@ package de.thd.graf.crillion.graphics.basicobjects;
 import de.thd.graf.crillion.gameview.GameView;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Superclass for the block objects
  */
-public abstract class BlockObjects extends CollidableGameObject {
+public abstract class BlockObjects extends CollidableGameObject implements Cloneable {
 
     protected String blockImage;
 
@@ -40,5 +41,37 @@ public abstract class BlockObjects extends CollidableGameObject {
      */
     protected void addHitBoxToCanvas(){
         gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
+    }
+
+    /**
+     * Clones the object.
+     * @return
+     */
+    @Override
+    public BlockObjects clone() {
+        return (BlockObjects) super.clone();
+    }
+
+    /**
+     * Compares the objects hitboxes.
+     * @param o object.
+     * @return true or false if equal or not equal.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        BlockObjects that = (BlockObjects) o;
+        return Objects.equals(hitBox, that.hitBox);
+    }
+
+    /**
+     * Creates hashcode.
+     * @return hashcode.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), hitBox);
     }
 }

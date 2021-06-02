@@ -6,10 +6,12 @@ import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
+import java.util.Objects;
+
 /**
  * Block which changes the Ball color.
  */
-public class ColorChangingBlock extends BlockObjects {
+public class ColorChangingBlock extends BlockObjects implements Cloneable {
 
     private String blockImage;
 
@@ -77,5 +79,37 @@ public class ColorChangingBlock extends BlockObjects {
      */
     public String getBlockImage() {
         return blockImage;
+    }
+
+    /**
+     * Clones the colorChangingBlock.
+     * @return clone.
+     */
+    @Override
+    public ColorChangingBlock clone(){
+        return (ColorChangingBlock) super.clone();
+    }
+
+    /**
+     *Compares color of color-changing-blocks.
+     * @param o object.
+     * @return true of false
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ColorChangingBlock colorBlock = (ColorChangingBlock) o;
+        return color == colorBlock.color;
+    }
+
+    /**
+     * Creates hashcode for the color-changing-block.
+     * @return hashcode.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), color);
     }
 }

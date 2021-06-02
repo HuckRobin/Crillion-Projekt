@@ -36,6 +36,8 @@ class GameObjectManager {
     private final LinkedList<GameObject> gameObjects;
     private final LinkedList<Scoreboard> scoreboards;
 
+    ArrayList<CollidableGameObject> collidableGameObjects = new ArrayList<>();
+
     /**
      * Create the GameObjectManager
      *
@@ -61,7 +63,6 @@ class GameObjectManager {
         this.scoreboards = new LinkedList<>(List.of(scoreboard));
 
 
-        ArrayList<CollidableGameObject> collidableGameObjects = new ArrayList<>();
         collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight, colorChangingBlock, deadlyBlock, moveableBlock, wallBlock));
         this.ball = new Ball(gameView, collidableGameObjects);
     }
@@ -118,5 +119,13 @@ class GameObjectManager {
      */
     public LinkedList<GameObject> getGameObjects() {
         return gameObjects;
+    }
+
+    /**
+     * Get the ColliadbleGameObjects
+     * @return
+     */
+    public ArrayList<CollidableGameObject> getCollidableGameObjects() {
+        return collidableGameObjects;
     }
 }
