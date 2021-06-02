@@ -110,17 +110,6 @@ public class Ball extends CollidingGameObject {
         this.position.down(this.speedInPixel);
     }
 
-    /**
-     * The PlayerObjects shoots
-     */
-    public void shoot() {
-        shooting = true;
-        if(gameView.timerExpired("Shoot","blockExplosion")) {
-            gameView.setTimer("Shoot", "blockExplosion", 300);
-            gamePlayManager.shootBallExplosion(this.position);
-        }
-    }
-
 
     /**
      * {@inheritDoc}

@@ -2,11 +2,11 @@ package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
-import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
-import de.thd.graf.crillion.graphics.dynamicobjects.BlockExplosion;
 import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
+import de.thd.graf.crillion.graphics.staticobjects.DeadlyBlock;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
@@ -31,7 +31,6 @@ public class GamePlayManager {
         this.gameObjectManager = gameObjectManager;
         this.random = new Random();
         this.listHasBeenDeleted = false;
-        gameObjectManager.getBall().setGamePlayManager(this);
     }
 
     /**
@@ -45,13 +44,14 @@ public class GamePlayManager {
      * Spawn and destroys the vanishing block after a certain time
      */
     public void spawnAndDestroyVanishingblock() {
-        VanishingBlock vanishingBlock = new VanishingBlock(gameView);
+        LinkedList<VanishingBlock> vanishingBlocks = gameObjectManager.getVanishingBlocks();
 
         if (gameView.timerExpired("Spawn", "vanishingBlock")) {
             gameView.setTimer("Spawn", "vanishingBlock", 1000);
-            this.gameObjectManager.getVanishingBlocks().add(vanishingBlock);
+            VanishingBlock vanishingBlock = new VanishingBlock(gameView);
+            vanishingBlock.setGamePlayManager(this);
+            vanishingBlocks.add(vanishingBlock);
         }
-
         if (!this.gameObjectManager.getVanishingBlocks().isEmpty() && gameView.timerExpired("Destroy", "vanishingBlock")) {
             gameView.setTimer("Destroy", "vanishingBlock", 5000);
             this.gameObjectManager.getVanishingBlocks().remove(random.nextInt(this.gameObjectManager.getVanishingBlocks().size()));
@@ -66,29 +66,8 @@ public class GamePlayManager {
     private void updateLevel() {
     }
 
-    /**
-     * Adds a shot in form of a explosion
-     *
-     * @param startPosition The position to spawn the shot from
-     */
-    public void shootBallExplosion(Position startPosition) {
-        BlockExplosion blockExplosion = new BlockExplosion(gameView);
-        blockExplosion.getPosition().x = startPosition.x;
-        blockExplosion.getPosition().y = startPosition.y;
-        blockExplosion.setGamePlayManager(this);
-        this.gameObjectManager.getBlockExplosions().add(blockExplosion);
-    }
-
-    /**
-     * Destroy the block explosion
-     *
-     * @param blockExplosion
-     */
-    public void destroy(BlockExplosion blockExplosion) {
-        this.gameObjectManager.getBlockExplosions().remove(blockExplosion);
-    }
-
-    public void bounceBall(BlockObjects blockObjects){
+    public void destroy(DeadlyBlock deadlyBlock){
+        gameObjectManager.getGameObjects().remove(deadlyBlock);
     }
 }
 

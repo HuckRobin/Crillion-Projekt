@@ -29,9 +29,6 @@ class InputManager {
         for (int keyCode : gedruekteTasten) {
 
             switch (keyCode) {
-                case KeyEvent.VK_SPACE:
-                    this.ball.shoot();
-                    break;
                 case KeyEvent.VK_RIGHT:
                     this.ball.right();
                     break;

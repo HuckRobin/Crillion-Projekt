@@ -49,7 +49,8 @@ public class DeadlyBlock extends BlockObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
+        //gamePlayManager.destroy(this);
+        System.out.println("Moin");
     }
 
     private void losesOneLifeWhenHit() {
@@ -72,7 +73,6 @@ public class DeadlyBlock extends BlockObjects {
      */
     @Override
     public void updateStatus() {
-
     }
 
 
