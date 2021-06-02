@@ -1,6 +1,7 @@
 package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 /**
  * The player object. A (color changing) ball which is controlled by the Player.
  */
-public class Ball extends GameObject {
+public class Ball extends CollidableGameObject {
 
     private final String blueBall;
     private final String greenBall;
@@ -42,10 +43,28 @@ public class Ball extends GameObject {
         this.purpleBall = "Purple-Ball.png";
         this.shooting = false;
         this.speedInPixel = 2;
-        this.size = 50;
         this.size = 1;
-        this.width = 10 * (int) size;
-        this.height = 10 * (int) size;
+        this.width = 11 * (int) size;
+        this.height = 11 * (int) size;
+        this.hitBox = new Rectangle((int) this.position.x, (int) this.position.y, this.width - 1, this.height - 1);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void updateHitBoxPosition() {
+        this.hitBox.x = (int) this.position.x + 3;
+        this.hitBox.y = (int) this.position.y + 3;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param otherObject The other GameObject that is involved in the collision.
+     */
+    @Override
+    public void reactToCollision(CollidableGameObject otherObject) {
+
     }
 
     /**
@@ -102,6 +121,7 @@ public class Ball extends GameObject {
                 gameView.addTextToCanvas("X", this.position.x, this.position.y, this.size, Color.WHITE, this.rotation);
         } else
             gameView.addImageToCanvas(this.redBall, this.position.x, this.position.y, this.size, this.rotation);
+        gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
     }
 
     /**
