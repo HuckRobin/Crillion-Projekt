@@ -7,8 +7,15 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
 
+/**
+ * Playing field limitation for the top side
+ */
 public class BoundaryTop extends BoundaryObjects {
 
+    /**
+     * Create the limitation for the top
+     * @param gameView Get gameview
+     */
     public BoundaryTop(GameView gameView) {
         super(gameView);
         this.position = new Position(0, 50);

@@ -80,13 +80,4 @@ public class VanishingBlock extends BlockObjects {
     public String getBlockImage() {
         return blockImage;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return "VanishingBlock: " + position;
-    }
-
 }

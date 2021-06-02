@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * The player object. A (color changing) ball which is controlled by the Player.
  */
 public class Ball extends CollidingGameObject {
+    private enum Status {RED, BLUE, GREEN, YELLOW, PURPLE}
 
     private final String blueBall;
     private final String greenBall;
@@ -26,6 +27,8 @@ public class Ball extends CollidingGameObject {
     private boolean changeDirection;
     private BoundaryLeft boundaryLeft;
     private BoundaryRight boundaryRight;
+
+    private Status status;
 
     /**
      * Constant to activate diagonal movement
@@ -39,10 +42,12 @@ public class Ball extends CollidingGameObject {
     /**
      * Create the PlayerObject
      * @param gameView get important Code from GameView
+     * @param objectsToCollideWith Game objects this game object can collide with.
      */
     public Ball(GameView gameView, ArrayList<CollidableGameObject> objectsToCollideWith) {
         super(gameView, objectsToCollideWith);
         this.position = new Position(GameView.WIDTH / 2, GameView.HEIGHT / 2);
+        this.status = Status.RED;
         this.blueBall = "Blue-Ball.png";
         this.greenBall = "Green-Ball.png";
         this.redBall = "Red-Ball.png";

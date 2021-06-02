@@ -36,7 +36,7 @@ class GameObjectManager {
     private final LinkedList<GameObject> gameObjects;
     private final LinkedList<Scoreboard> scoreboards;
 
-    ArrayList<CollidableGameObject> collidableGameObjects = new ArrayList<>();
+    ArrayList<CollidableGameObject> collidableGameObjects;
 
     /**
      * Create the GameObjectManager
@@ -61,6 +61,7 @@ class GameObjectManager {
 
         this.gameObjects = new LinkedList<>();
         this.scoreboards = new LinkedList<>(List.of(scoreboard));
+        this.collidableGameObjects = new ArrayList<>();
 
 
         collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight, colorChangingBlock, deadlyBlock, moveableBlock, wallBlock));

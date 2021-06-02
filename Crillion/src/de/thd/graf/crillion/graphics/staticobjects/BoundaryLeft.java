@@ -7,8 +7,15 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
 
+/**
+ * Playing field limitation for the left side
+ */
 public class BoundaryLeft extends BoundaryObjects {
 
+    /**
+     * Create the limitation for the left
+     * @param gameView Get gameview
+     */
     public BoundaryLeft(GameView gameView){
         super(gameView);
         this.position = new Position(0 ,50);

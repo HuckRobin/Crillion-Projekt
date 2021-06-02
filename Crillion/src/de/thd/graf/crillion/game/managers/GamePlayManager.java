@@ -66,9 +66,5 @@ public class GamePlayManager {
 
     private void updateLevel() {
     }
-
-    public void destroy(DeadlyBlock deadlyBlock){
-        gameObjectManager.getGameObjects().remove(deadlyBlock);
-    }
 }
 

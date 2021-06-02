@@ -67,11 +67,4 @@ public class WallBlock extends BlockObjects {
     private void changeImage() {
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return "FixedBlock: " + position;
-    }
 }

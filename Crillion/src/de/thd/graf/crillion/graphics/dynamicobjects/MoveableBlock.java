@@ -98,12 +98,4 @@ public class MoveableBlock extends BlockObjects implements MovingGameObject {
     public String getBlockImage() {
         return blockImage;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return "MoveableBlock: " + position;
-    }
 }

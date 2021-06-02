@@ -39,6 +39,5 @@ public class Score extends ScoreObjects {
      */
     @Override
     public void updateStatus() {
-
     }
 }

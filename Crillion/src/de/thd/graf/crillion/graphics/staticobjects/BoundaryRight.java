@@ -7,8 +7,15 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
 
+/**
+ * Playing field limitation for the right side
+ */
 public class BoundaryRight extends BoundaryObjects {
 
+    /**
+     * Create the limitation for the right
+     * @param gameView Get gameview
+     */
     public BoundaryRight(GameView gameView){
         super(gameView);
         this.position = new Position(GameView.WIDTH - 10 ,50);
