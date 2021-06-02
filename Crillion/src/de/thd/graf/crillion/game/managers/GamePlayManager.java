@@ -1,6 +1,8 @@
 package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.gameview.GameView;
+import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.dynamicobjects.BlockExplosion;
 import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
@@ -84,6 +86,9 @@ public class GamePlayManager {
      */
     public void destroy(BlockExplosion blockExplosion) {
         this.gameObjectManager.getBlockExplosions().remove(blockExplosion);
+    }
+
+    public void bounceBall(BlockObjects blockObjects){
     }
 }
 

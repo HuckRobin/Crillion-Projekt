@@ -1,16 +1,21 @@
 package de.thd.graf.crillion.graphics.dynamicobjects;
 
+import de.thd.graf.crillion.game.managers.GamePlayManager;
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
+import de.thd.graf.crillion.graphics.basicobjects.CollidingGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
+import de.thd.graf.crillion.graphics.staticobjects.BoundaryLeft;
+import de.thd.graf.crillion.graphics.staticobjects.BoundaryRight;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * The player object. A (color changing) ball which is controlled by the Player.
  */
-public class Ball extends CollidableGameObject {
+public class Ball extends CollidingGameObject {
 
     private final String blueBall;
     private final String greenBall;
@@ -18,7 +23,9 @@ public class Ball extends CollidableGameObject {
     private final String yellowBall;
     private final String purpleBall;
     private boolean shooting;
-
+    private boolean changeDirection;
+    private BoundaryLeft boundaryLeft;
+    private BoundaryRight boundaryRight;
 
     /**
      * Constant to activate diagonal movement
@@ -33,8 +40,8 @@ public class Ball extends CollidableGameObject {
      * Create the PlayerObject
      * @param gameView get important Code from GameView
      */
-    public Ball(GameView gameView) {
-        super(gameView);
+    public Ball(GameView gameView, ArrayList<CollidableGameObject> objectsToCollideWith) {
+        super(gameView, objectsToCollideWith);
         this.position = new Position(GameView.WIDTH / 2, GameView.HEIGHT / 2);
         this.blueBall = "Blue-Ball.png";
         this.greenBall = "Green-Ball.png";
@@ -63,9 +70,7 @@ public class Ball extends CollidableGameObject {
      * @param otherObject The other GameObject that is involved in the collision.
      */
     @Override
-    public void reactToCollision(CollidableGameObject otherObject) {
-
-    }
+    public void reactToCollision(CollidableGameObject otherObject){    }
 
     /**
      * Move PlayerObject to the left
@@ -125,10 +130,28 @@ public class Ball extends CollidableGameObject {
     }
 
     /**
+     * Updates the position of the ball so that the ball is constantly moving
+     */
+    public void updatePositition(){
+        if (this.position.x == GameView.WIDTH - this.hitBox.width - 10) {
+            changeDirection = false;
+        } else if (this.position.x == GameView.WIDTH - GameView.WIDTH + 10) {
+            changeDirection = true;
+        }
+
+        if (changeDirection == true) {
+            this.position.right(this.speedInPixel);
+        } else {
+            this.position.left(this.speedInPixel);
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void updateStatus() {
+        updatePositition();
     }
 
     /**
@@ -164,5 +187,13 @@ public class Ball extends CollidableGameObject {
      */
     public String getPurpleBall() {
         return purpleBall;
+    }
+
+    /**
+     * Return the boolean ChangeDirection
+     * @return
+     */
+    public boolean isChangeDirection() {
+        return changeDirection;
     }
 }

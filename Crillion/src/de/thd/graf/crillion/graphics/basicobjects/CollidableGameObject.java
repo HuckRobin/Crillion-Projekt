@@ -3,6 +3,7 @@ import de.thd.graf.crillion.gameview.GameView;
 import java.awt.*;
 /** Represents all game objects that are able to collide with something. */
 public abstract class CollidableGameObject extends GameObject {
+
     protected Rectangle hitBox;
 
     protected CollidableGameObject(GameView gameView) {

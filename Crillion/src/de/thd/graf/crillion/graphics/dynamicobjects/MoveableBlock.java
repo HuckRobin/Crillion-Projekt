@@ -89,7 +89,6 @@ public class MoveableBlock extends BlockObjects implements MovingGameObject {
         } else {
             position.left(this.speedInPixel);
         }
-
     }
 
     /**
