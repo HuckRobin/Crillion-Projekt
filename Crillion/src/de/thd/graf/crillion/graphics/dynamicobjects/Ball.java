@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class Ball extends CollidingGameObject {
     private enum Status {RED, BLUE, GREEN, YELLOW, PURPLE}
-    private enum Direction {TOP, DOWN, LEFT, RIGHT}
+    public enum Direction {UP, DOWN, LEFT, RIGHT}
 
     private final String blueBall;
     private final String greenBall;
@@ -142,26 +142,40 @@ public class Ball extends CollidingGameObject {
      */
     public void updatePositition() {
         if (collidesWith(boundaryLeft)) {
-            this.changeDirectionLeftToRight = true;
+            this.direction = Direction.RIGHT;
         } else if (collidesWith(boundaryRight)) {
-            this.changeDirectionLeftToRight = false;
-
+            this.direction = Direction.LEFT;
         } else if (collidesWith(boundaryTop)) {
-            this.changeDirectionTopToBottom = true;
+            this.direction = Direction.DOWN;
         } else if (collidesWith(boundaryBottom)) {
-            this.changeDirectionTopToBottom = false;
+            this.direction = Direction.UP;
         }
 
-        if (this.changeDirectionLeftToRight) {
-            this.position.right(this.speedInPixel);
-        } else {
-            this.position.left(this.speedInPixel);
-        }
+      // if (this.changeDirectionLeftToRight) {
+      //     this.position.right(this.speedInPixel);
+      // } else {
+      //     this.position.left(this.speedInPixel);
+      // }
 
-        if (this.changeDirectionTopToBottom) {
-            this.position.down(this.speedInPixel);
-        } else {
-            this.position.up(this.speedInPixel);
+      // if (this.changeDirectionTopToBottom) {
+      //     this.position.down(this.speedInPixel);
+      // } else {
+      //     this.position.up(this.speedInPixel);
+      // }
+
+        switch (direction) {
+            case DOWN:
+                this.position.down(this.speedInPixel);
+                break;
+            case UP:
+                this.position.up(this.speedInPixel);
+                break;
+            case LEFT:
+                this.position.left(this.speedInPixel);
+                break;
+            case RIGHT:
+                this.position.right(this.speedInPixel);
+                break;
         }
     }
 
@@ -215,5 +229,13 @@ public class Ball extends CollidingGameObject {
      */
     public boolean isChangeDirectionLeftToRight() {
         return changeDirectionLeftToRight;
+    }
+
+    /**
+     * Return the direction of the ball
+     * @return
+     */
+    public Direction getDirection() {
+        return direction;
     }
 }
