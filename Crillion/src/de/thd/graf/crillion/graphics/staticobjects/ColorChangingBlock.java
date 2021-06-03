@@ -13,8 +13,6 @@ import java.util.Objects;
  */
 public class ColorChangingBlock extends BlockObjects implements Cloneable {
 
-    private String blockImage;
-
     /**
      * Create a ColorChangingBlock
      * @param gameView get important Code from GameView

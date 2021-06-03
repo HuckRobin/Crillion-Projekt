@@ -10,7 +10,7 @@ import java.awt.*;
 public abstract class ScoreObjects extends GameObject{
 
     protected String name;
-    protected int score;
+    protected int scoreNum;
 
     /**
      * Create the Scoreobject

@@ -12,8 +12,8 @@ class Highscore extends ScoreObjects {
     public Highscore(GameView gameView){
         super(gameView);
         this.position = new Position(GameView.WIDTH, 30);
-        this.score = 5;
-        this.name = "Highscore:" + this.score;
+        this.scoreNum = 5;
+        this.name = "Highscore:" + this.scoreNum;
     }
 
     /**

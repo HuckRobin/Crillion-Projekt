@@ -10,7 +10,6 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
  */
 public class WallBlock extends BlockObjects {
 
-
     /**
      * Create a WallBlock
      * @param gameView get important Code from GameView

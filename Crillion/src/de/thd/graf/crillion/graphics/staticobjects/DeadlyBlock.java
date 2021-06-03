@@ -12,8 +12,6 @@ import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
  */
 public class DeadlyBlock extends BlockObjects {
 
-    private String blockImage;
-
     /**
      * Creates a DeadlyBlock
      *

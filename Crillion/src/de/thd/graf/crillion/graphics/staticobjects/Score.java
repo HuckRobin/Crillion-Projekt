@@ -1,11 +1,8 @@
 package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
-
-import java.awt.*;
 
 /**
  * Create the score to add to the scoreboard
@@ -19,8 +16,8 @@ public class Score extends ScoreObjects {
     public Score(GameView gameView){
         super(gameView);
         this.position = new Position(GameView.WIDTH, 0);
-        this.score = 0;
-        this.name = "Score:" + this.score;
+        this.scoreNum = 0;
+        this.name = "Score:" + this.scoreNum;
     }
 
     private void addPointsToScore(){}

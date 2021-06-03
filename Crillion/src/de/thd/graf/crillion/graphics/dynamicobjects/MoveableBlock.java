@@ -11,8 +11,6 @@ import java.awt.*;
  */
 public class MoveableBlock extends BlockObjects implements MovingGameObject {
 
-    private String blockImage;
-
     private boolean flyFromRightToLeft;
 
     /**

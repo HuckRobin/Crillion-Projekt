@@ -14,7 +14,6 @@ import java.util.Random;
  */
 public class VanishingBlock extends BlockObjects {
 
-    private String blockImage;
     private Random random;
 
     /**
