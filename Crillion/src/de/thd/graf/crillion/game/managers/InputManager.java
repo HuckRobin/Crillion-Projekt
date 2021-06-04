@@ -30,37 +30,11 @@ class InputManager {
 
             switch (keyCode) {
                 case KeyEvent.VK_RIGHT:
-                    if(this.ball.getDirection() != Ball.Direction.LEFT && this.ball.getDirection() != Ball.Direction.RIGHT) {
-                        this.ball.right();
-                    }
-                    else {
-                        continue;
-                    }
+                    this.ball.right();
                     break;
-                case KeyEvent.VK_LEFT:
-                    if(this.ball.getDirection() != Ball.Direction.LEFT && this.ball.getDirection() != Ball.Direction.RIGHT) {
-                        this.ball.left();
-                    }
-                    else {
-                        continue;
-                    }
-                    break;
-                case KeyEvent.VK_UP:
-                    if(this.ball.getDirection() != Ball.Direction.DOWN && this.ball.getDirection() != Ball.Direction.UP) {
-                        this.ball.up();
-                    }
-                    else {
-                        continue;
-                    }
-                    break;
-                case KeyEvent.VK_DOWN:
-                    if(this.ball.getDirection() != Ball.Direction.DOWN && this.ball.getDirection() != Ball.Direction.UP) {
-                        this.ball.down();
-                    }
-                    else {
-                        continue;
-                    }
-                    break;
+               case KeyEvent.VK_LEFT:
+                   this.ball.left();
+                   break;
             }
 
             if (Ball.DIAGONAL_MOVEMENT == false) {

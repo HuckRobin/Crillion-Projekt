@@ -17,7 +17,8 @@ import java.util.ArrayList;
  */
 public class Ball extends CollidingGameObject {
     private enum Status {RED, BLUE, GREEN, YELLOW, PURPLE}
-    public enum Direction {UP, DOWN, LEFT, RIGHT}
+
+    private enum Direction {UP, DOWN,}
 
     private final String blueBall;
     private final String greenBall;
@@ -54,7 +55,7 @@ public class Ball extends CollidingGameObject {
         super(gameView, objectsToCollideWith);
         this.position = new Position(GameView.WIDTH / 2, GameView.HEIGHT / 2);
         this.status = Status.RED;
-        this.direction = Direction.LEFT;
+        this.direction = Direction.UP;
         this.blueBall = "Blue-Ball.png";
         this.greenBall = "Green-Ball.png";
         this.redBall = "Red-Ball.png";
@@ -67,6 +68,7 @@ public class Ball extends CollidingGameObject {
         this.height = 11 * (int) size;
         this.hitBox.width = (int) (this.width - 1 * size);
         this.hitBox.height = (int) (this.height - 1 * size);
+        this.changeDirectionTopToBottom = false;
 
         this.boundaryTop = (BoundaryTop) objectsToCollideWith.get(0);
         this.boundaryLeft = (BoundaryLeft) objectsToCollideWith.get(1);
@@ -96,14 +98,22 @@ public class Ball extends CollidingGameObject {
      * Move PlayerObject to the left
      */
     public void left() {
-        this.position.left(this.speedInPixel);
+        if (collidesWith(boundaryLeft)) {
+            this.position.left(0);
+        } else {
+            this.position.left(this.speedInPixel);
+        }
     }
 
     /**
      * Move PlayerObject to the right
      */
     public void right() {
-        this.position.right(this.speedInPixel);
+        if (collidesWith(boundaryRight)) {
+            this.position.right(0);
+        } else {
+            this.position.right(this.speedInPixel);
+        }
     }
 
     /**
@@ -141,41 +151,10 @@ public class Ball extends CollidingGameObject {
      * Updates the position of the ball so that the ball is constantly moving
      */
     public void updatePositition() {
-        if (collidesWith(boundaryLeft)) {
-            this.direction = Direction.RIGHT;
-        } else if (collidesWith(boundaryRight)) {
-            this.direction = Direction.LEFT;
-        } else if (collidesWith(boundaryTop)) {
-            this.direction = Direction.DOWN;
-        } else if (collidesWith(boundaryBottom)) {
-            this.direction = Direction.UP;
-        }
-
-      // if (this.changeDirectionLeftToRight) {
-      //     this.position.right(this.speedInPixel);
-      // } else {
-      //     this.position.left(this.speedInPixel);
-      // }
-
-      // if (this.changeDirectionTopToBottom) {
-      //     this.position.down(this.speedInPixel);
-      // } else {
-      //     this.position.up(this.speedInPixel);
-      // }
-
-        switch (direction) {
-            case DOWN:
-                this.position.down(this.speedInPixel);
-                break;
-            case UP:
-                this.position.up(this.speedInPixel);
-                break;
-            case LEFT:
-                this.position.left(this.speedInPixel);
-                break;
-            case RIGHT:
-                this.position.right(this.speedInPixel);
-                break;
+        if (changeDirectionTopToBottom) {
+            this.down();
+        } else {
+            this.up();
         }
     }
 
@@ -184,6 +163,11 @@ public class Ball extends CollidingGameObject {
      */
     @Override
     public void updateStatus() {
+        if (collidesWith(boundaryTop)) {
+            this.changeDirectionTopToBottom = true;
+        } else if (collidesWith(boundaryBottom)) {
+            this.changeDirectionTopToBottom = false;
+        }
         updatePositition();
     }
 
@@ -220,22 +204,5 @@ public class Ball extends CollidingGameObject {
      */
     public String getPurpleBall() {
         return purpleBall;
-    }
-
-    /**
-     * Return the boolean ChangeDirection
-     *
-     * @return
-     */
-    public boolean isChangeDirectionLeftToRight() {
-        return changeDirectionLeftToRight;
-    }
-
-    /**
-     * Return the direction of the ball
-     * @return
-     */
-    public Direction getDirection() {
-        return direction;
     }
 }
