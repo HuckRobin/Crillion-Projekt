@@ -3,9 +3,7 @@ package de.thd.graf.crillion.game.managers;
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
-import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
-import de.thd.graf.crillion.graphics.dynamicobjects.MoveableBlock;
-import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
+import de.thd.graf.crillion.graphics.dynamicobjects.*;
 import de.thd.graf.crillion.graphics.staticobjects.*;
 
 import java.util.ArrayList;
@@ -31,6 +29,8 @@ class GameObjectManager {
    private final BoundaryLeft boundaryLeft;
    private final BoundaryBottom boundaryBottom;
    private final BoundaryRight boundaryRight;
+   private final FollowerBall followerBall;
+   private final RandomBall randomBall;
 
     private final LinkedList<VanishingBlock> vanishingBlocks;
     private final LinkedList<GameObject> gameObjects;
@@ -55,6 +55,9 @@ class GameObjectManager {
         this.boundaryLeft = new BoundaryLeft(gameView);
         this.boundaryBottom = new BoundaryBottom(gameView);
         this.boundaryRight = new BoundaryRight(gameView);
+        this.randomBall = new RandomBall(gameView);
+        this.followerBall = new FollowerBall(gameView, randomBall);
+
 
 
         this.vanishingBlocks = new LinkedList<>();
@@ -79,6 +82,8 @@ class GameObjectManager {
         gameObjects.addAll(vanishingBlocks);
         gameObjects.addAll(List.of(boundaryBottom, boundaryTop, boundaryRight, boundaryLeft));
         gameObjects.addAll(List.of(colorChangingBlock, deadlyBlock, moveableBlock, wallBlock, ball));
+        gameObjects.add(followerBall);
+        gameObjects.add(randomBall);
 
         for (GameObject gameObject : gameObjects) {
             gameObject.update();

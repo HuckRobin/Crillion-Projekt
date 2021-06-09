@@ -131,4 +131,14 @@ public class Position implements Cloneable {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
+    /**
+     * Calculates the distance to any other position.
+     *
+     * @param other Position to calculate the distance to.
+     * @return The distance.
+     */
+    public double distance(Position other) {
+        return Math.sqrt(Math.pow((x - other.x), 2) + Math.pow((y - other.y), 2));
+    }
 }

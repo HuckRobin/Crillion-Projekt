@@ -43,7 +43,8 @@ public class VanishingBlock extends BlockObjects {
      */
     @Override
     protected void updateHitBoxPosition() {
-        super.updateHitBoxPosition();
+        this.hitBox.x = (int) this.position.x;
+        this.hitBox.y = (int) this.position.y;
     }
 
     /**
@@ -51,8 +52,8 @@ public class VanishingBlock extends BlockObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        System.out.println("Hit_Vanishingblock");
         this.gamePlayManager.destroy(this);
+        System.out.println("Hit_Vanishingblock");
     }
 
     private void vanishTheBlockWhenHit() {
