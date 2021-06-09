@@ -3,15 +3,19 @@ package de.thd.graf.crillion.graphics.dynamicobjects;
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.MovingGameObject;
+import de.thd.graf.crillion.graphics.basicobjects.MovmentPatterns;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 /** Ball with random movement. */
 public class RandomBall extends GameObject implements MovingGameObject {
     private final Position targetPosition;
     private final Random random;
+    private final MovmentPatterns movmentPatterns;
+    private final ArrayList<Position> patternList;
 
     /**
      * Creates the GameObject with the GameView to be displayed on.
@@ -22,6 +26,8 @@ public class RandomBall extends GameObject implements MovingGameObject {
         super(gameView);
         this.targetPosition = new Position(800, 200);
         this.random = new Random();
+        this.movmentPatterns = new MovmentPatterns();
+        this.patternList = new ArrayList<>();
         this.size = 50;
         this.speedInPixel = 4;
     }
@@ -33,7 +39,7 @@ public class RandomBall extends GameObject implements MovingGameObject {
             position.right((targetPosition.x - position.x) / distance * speedInPixel);
             position.down((targetPosition.y - position.y) / distance * speedInPixel);
         } else {
-            setRandomTargetPosition();
+            setPatternTargetPosition();
         }
     }
 
@@ -53,5 +59,15 @@ public class RandomBall extends GameObject implements MovingGameObject {
     public void addToCanvas() {
         gameView.addOvalToCanvas(position.x, position.y, size, size, 2, true, Color.YELLOW);
         gameView.addOvalToCanvas(targetPosition.x, targetPosition.y, size, size, 2, false, Color.WHITE);
+    }
+
+    public void setPatternTargetPosition(){
+        if (this.patternList.size() == 0){
+            this.patternList.addAll(this.movmentPatterns.getPattern(this.movmentPatterns.getRandomPattern()));
+        }
+
+        this.targetPosition.x = this.patternList.get(0).x;
+        this.targetPosition.y = this.patternList.get(0).y;
+        this.patternList.remove(0);
     }
 }
