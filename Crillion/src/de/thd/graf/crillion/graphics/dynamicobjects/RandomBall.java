@@ -3,7 +3,7 @@ package de.thd.graf.crillion.graphics.dynamicobjects;
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.MovingGameObject;
-import de.thd.graf.crillion.graphics.basicobjects.MovmentPatterns;
+import de.thd.graf.crillion.graphics.basicobjects.MovementPatterns;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.util.Random;
 public class RandomBall extends GameObject implements MovingGameObject {
     private final Position targetPosition;
     private final Random random;
-    private final MovmentPatterns movmentPatterns;
+    private final MovementPatterns movementPatterns;
     private final ArrayList<Position> patternList;
 
     /**
@@ -26,7 +26,7 @@ public class RandomBall extends GameObject implements MovingGameObject {
         super(gameView);
         this.targetPosition = new Position(800, 200);
         this.random = new Random();
-        this.movmentPatterns = new MovmentPatterns();
+        this.movementPatterns = new MovementPatterns();
         this.patternList = new ArrayList<>();
         this.size = 50;
         this.speedInPixel = 4;
@@ -61,9 +61,12 @@ public class RandomBall extends GameObject implements MovingGameObject {
         gameView.addOvalToCanvas(targetPosition.x, targetPosition.y, size, size, 2, false, Color.WHITE);
     }
 
+    /**
+     * Set position to aim at
+     */
     public void setPatternTargetPosition(){
         if (this.patternList.size() == 0){
-            this.patternList.addAll(this.movmentPatterns.getPattern(this.movmentPatterns.getRandomPattern()));
+            this.patternList.addAll(this.movementPatterns.getPattern(this.movementPatterns.getRandomPattern()));
         }
 
         this.targetPosition.x = this.patternList.get(0).x;

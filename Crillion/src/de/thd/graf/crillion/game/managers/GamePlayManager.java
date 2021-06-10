@@ -2,6 +2,7 @@ package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
 import de.thd.graf.crillion.graphics.staticobjects.DeadlyBlock;
@@ -62,6 +63,7 @@ public class GamePlayManager {
             this.gameObjectManager.getVanishingBlocks().clear();
             this.listHasBeenDeleted = true;
         }
+
     }
 
     /**
