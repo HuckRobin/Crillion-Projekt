@@ -26,7 +26,6 @@ public class Ball extends CollidingGameObject {
     private final String yellowBall;
     private final String purpleBall;
     private boolean shooting;
-    private boolean changeDirectionLeftToRight;
     private boolean changeDirectionTopToBottom;
     private final BoundaryLeft boundaryLeft;
     private final BoundaryRight boundaryRight;
@@ -156,6 +155,12 @@ public class Ball extends CollidingGameObject {
         } else {
             this.up();
         }
+
+        if (collidesWith(boundaryTop)) {
+            this.changeDirectionTopToBottom = true;
+        } else if (collidesWith(boundaryBottom)) {
+            this.changeDirectionTopToBottom = false;
+        }
     }
 
     /**
@@ -163,11 +168,6 @@ public class Ball extends CollidingGameObject {
      */
     @Override
     public void updateStatus() {
-        if (collidesWith(boundaryTop)) {
-            this.changeDirectionTopToBottom = true;
-        } else if (collidesWith(boundaryBottom)) {
-            this.changeDirectionTopToBottom = false;
-        }
         updatePositition();
     }
 
