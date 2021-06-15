@@ -1,7 +1,11 @@
-package de.thd.graf.crillion.graphics.staticobjects;
+package de.thd.graf.crillion.graphics.scoreobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
+import de.thd.graf.crillion.graphics.scoreobjects.Highscore;
+import de.thd.graf.crillion.graphics.scoreobjects.Level;
+import de.thd.graf.crillion.graphics.scoreobjects.Lives;
+import de.thd.graf.crillion.graphics.scoreobjects.Score;
 
 /**
  * Scoreboard for the game
@@ -12,7 +16,7 @@ public class Scoreboard extends ScoreObjects {
     private final Score score;
     private final Level level;
     private final Lives lives;
-    private final LeftBlock leftBlock;
+
 
     /**
      * Create the Scoreboard
@@ -25,7 +29,7 @@ public class Scoreboard extends ScoreObjects {
         this.score = new Score(gameView);
         this.level = new Level(gameView);
         this.lives = new Lives(gameView);
-        this.leftBlock = new LeftBlock(gameView);
+
     }
 
     /**
@@ -35,7 +39,6 @@ public class Scoreboard extends ScoreObjects {
     public void addToCanvas() {
         this.level.addToCanvas();
         this.lives.addToCanvas();
-        this.leftBlock.addToCanvas();
         this.score.addToCanvas();
         this.highscore.addToCanvas();
     }

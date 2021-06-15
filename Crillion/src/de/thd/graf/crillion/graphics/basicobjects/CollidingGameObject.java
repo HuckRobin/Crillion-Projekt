@@ -47,4 +47,12 @@ public abstract class CollidingGameObject extends CollidableGameObject {
     protected final boolean collidesWith(CollidableGameObject other) {
         return this.hitBox.intersects(other.hitBox);
     }
+
+    /**
+     * Get CollidingGameObjects
+     * @return
+     */
+    public ArrayList<CollidableGameObject> getObjectsToCollideWith() {
+        return objectsToCollideWith;
+    }
 }

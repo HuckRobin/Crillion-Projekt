@@ -1,24 +1,19 @@
-package de.thd.graf.crillion.graphics.staticobjects;
+package de.thd.graf.crillion.graphics.scoreobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 
-class LeftBlock extends ScoreObjects {
-
+class Highscore extends ScoreObjects {
     /**
      * Create the Level object
-     *
      * @param gameView get important Code from GameView
      */
-    public LeftBlock(GameView gameView) {
+    public Highscore(GameView gameView){
         super(gameView);
-        this.position = new Position(300, 30);
-        this.scoreNum = 9;
-        this.name = "LeftBlocks:" + this.scoreNum;
-    }
-
-    private void addPointsToScore() {
+        this.position = new Position(GameView.WIDTH, 30);
+        this.scoreNum = 5;
+        this.name = "Highscore:" + this.scoreNum;
     }
 
     /**
@@ -26,8 +21,8 @@ class LeftBlock extends ScoreObjects {
      */
     @Override
     public void addToCanvas() {
-        gameView.addTextToCanvas(this.name, this.position.x, this.position.y, this.size,
-                this.color, this.rotation);
+        gameView.addTextToCanvas(this.name, this.position.x - this.name.length() * this.size, this.position.y,
+                this.size, this.color, this.rotation);
     }
 
     /**

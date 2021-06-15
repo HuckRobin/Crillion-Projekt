@@ -4,6 +4,7 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.dynamicobjects.*;
+import de.thd.graf.crillion.graphics.scoreobjects.Scoreboard;
 import de.thd.graf.crillion.graphics.staticobjects.*;
 
 import java.util.ArrayList;
