@@ -7,13 +7,13 @@ import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 /**
  * Class which indicates the level in which is the player
  */
-public class Level extends ScoreObjects {
+public class CurrentLevel extends ScoreObjects {
 
  /**
   * Create the Level object
   * @param gameView get important Code from GameView
   */
- public Level(GameView gameView){
+ public CurrentLevel(GameView gameView){
   super(gameView);
   this.position = new Position(0, 0);
   this.scoreNum = 0;

@@ -1,8 +1,10 @@
 package de.thd.graf.crillion.game.managers;
 
+import de.thd.graf.crillion.game.utilities.Level;
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
+import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
 import de.thd.graf.crillion.graphics.staticobjects.DeadlyBlock;
@@ -19,6 +21,8 @@ public class GamePlayManager {
     private final GameObjectManager gameObjectManager;
     private final Random random;
     private boolean listHasBeenDeleted;
+    private final Level levelEins;
+    private final VanishingBlock vanishingBlock;
 
     /**
      * Create the gameplay manager
@@ -32,12 +36,15 @@ public class GamePlayManager {
         this.gameObjectManager = gameObjectManager;
         this.random = new Random();
         this.listHasBeenDeleted = false;
+        this.levelEins = new Level(1);
+        this.vanishingBlock = new VanishingBlock(gameView);
     }
 
     /**
      * Updates the action of the game, new objects spawn
      */
     public void updateGamePlay() {
+        //createLevel();
         spawnAndDestroyVanishingblock();
     }
 
@@ -73,6 +80,14 @@ public class GamePlayManager {
      */
     public void destroy(VanishingBlock vanishingBlock) {
         gameObjectManager.getVanishingBlocks().remove(vanishingBlock);
+    }
+
+    public void createLevel(){
+        for (Position position : this.levelEins.level1("VanishingBlock")){
+            this.vanishingBlock.getPosition().x = position.x;
+            this.vanishingBlock.getPosition().y = position.y;
+            this.gameObjectManager.getVanishingBlocks().add(vanishingBlock);
+        }
     }
 }
 
