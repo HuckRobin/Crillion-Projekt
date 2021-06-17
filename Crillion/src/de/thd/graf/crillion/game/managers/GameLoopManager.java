@@ -18,7 +18,7 @@ public class GameLoopManager {
         this.gameView.setWindowTitle("Crillion");
         this.gameView.setStatusText("Phillip Graf - Java Programmierung SS 2021");
         this.gameView.setWindowIcon("Purple-Ball.png");
-        this.gameView.playSound("background_music.wav", true);
+        //this.gameView.playSound("background_music.wav", true);
         this.gameObjectManager = new GameObjectManager(gameView);
         this.inputManager = new InputManager(gameView, gameObjectManager.getBall());
         this.gamePlayManager = new GamePlayManager(gameView, gameObjectManager);

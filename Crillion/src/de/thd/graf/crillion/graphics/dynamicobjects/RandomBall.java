@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * creates the class Bush (decoration)
+ * creates the randomball
+ *
  */
 public class RandomBall extends MovementPatterns implements MovingGameObject {
     protected Position endPosition;
@@ -22,9 +23,8 @@ public class RandomBall extends MovementPatterns implements MovingGameObject {
     MovementPatterns movementPatterns;
 
     /**
-     * creates the bush
-     * for moving the position {@link Position} will be called
-     *
+     * creates Randomball
+     * for moving the position {@link Position} will be called     *
      * @param gameView
      * @see Position
      */
@@ -42,9 +42,7 @@ public class RandomBall extends MovementPatterns implements MovingGameObject {
     }
 
 
-    /**
-     * Draws the bush to the canvas.
-     */
+
     @Override
     public void addToCanvas() {
         gameView.addOvalToCanvas(position.x, position.y, size, size, 2, true, Color.YELLOW);
@@ -72,7 +70,6 @@ public class RandomBall extends MovementPatterns implements MovingGameObject {
             movementPosition++;
         } catch (Exception e) {
             movementPosition = 0;
-
         }
 
     }

@@ -9,6 +9,7 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
 import de.thd.graf.crillion.graphics.staticobjects.DeadlyBlock;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -23,7 +24,7 @@ public class GamePlayManager {
     private boolean listHasBeenDeleted;
     private final Level levelEins;
     private boolean nextLevel;
-    private boolean delVanHitbox;
+    ArrayList<GameObject> deletObjects;
 
     /**
      * Create the gameplay manager
@@ -39,7 +40,7 @@ public class GamePlayManager {
         this.listHasBeenDeleted = false;
         this.levelEins = new Level(1);
         this.nextLevel = true;
-        this.delVanHitbox = false;
+        this.deletObjects = new ArrayList<>();
     }
 
     /**
@@ -49,6 +50,7 @@ public class GamePlayManager {
         if (nextLevel) {
             createLevel();
         }
+        this.gameObjectManager.collidableGameObjects.removeAll(deletObjects);
         //spawnAndDestroyVanishingblock();
     }
 
@@ -84,7 +86,8 @@ public class GamePlayManager {
      */
     public void destroy(VanishingBlock vanishingBlock) {
         this.gameObjectManager.getVanishingBlocks().remove(vanishingBlock);
-        this.delVanHitbox = true;
+        this.deletObjects.add(vanishingBlock);
+        //this.gameObjectManager.getBall().getObjectsToCollideWith().remove(vanishingBlock);
     }
 
     /**
