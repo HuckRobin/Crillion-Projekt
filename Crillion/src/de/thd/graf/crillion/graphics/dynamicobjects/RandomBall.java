@@ -8,69 +8,75 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-/** Ball with random movement. */
-public class RandomBall extends GameObject implements MovingGameObject {
-    private final Position targetPosition;
-    private final Random random;
-    private final MovementPatterns movementPatterns;
-    private final ArrayList<Position> patternList;
+/**
+ * creates the class Bush (decoration)
+ */
+public class RandomBall extends MovementPatterns implements MovingGameObject {
+    protected Position endPosition;
+    private int movementPosition;
+    private ArrayList<Position> movementClusterSquare;
+    private ArrayList<Position> movemnetClusterZigZag;
+    MovementPatterns movementPatterns;
 
     /**
-     * Creates the GameObject with the GameView to be displayed on.
+     * creates the bush
+     * for moving the position {@link Position} will be called
      *
-     * @param gameView Window to show the GameObject on.
+     * @param gameView
+     * @see Position
      */
     public RandomBall(GameView gameView) {
         super(gameView);
-        this.targetPosition = new Position(800, 200);
-        this.random = new Random();
-        this.movementPatterns = new MovementPatterns();
-        this.patternList = new ArrayList<>();
         this.size = 50;
         this.speedInPixel = 4;
-    }
-
-    @Override
-    public void updatePosition() {
-        double distance = position.distance(targetPosition);
-        if (distance >= speedInPixel) {
-            position.right((targetPosition.x - position.x) / distance * speedInPixel);
-            position.down((targetPosition.y - position.y) / distance * speedInPixel);
-        } else {
-            setPatternTargetPosition();
-        }
+        this.position = new Position(0, 0);
+        this.endPosition = new Position(800, 200);
+        this.movementPosition = 0;
+        this.movementClusterSquare = new ArrayList<Position>(java.util.List.of(new Position(30, 30), new Position(930, 30), new Position(930, 510), new Position(30, 510)));
+        this.movemnetClusterZigZag = new ArrayList<Position>(List.of(new Position(300, 200), new Position(400, 340), new Position(500, 200), new Position(600, 340), new Position(700, 200), new Position(800, 340)));
+        gameView.setColorForBlockImage('.', Color.YELLOW);
+        gameView.setColorForBlockImage('G', Color.GREEN);
     }
 
 
-    @Override
-    protected void updateStatus() {
-
-    }
-
-   /** Set position to aim at */
-    public void setRandomTargetPosition() {
-        targetPosition.x = random.nextInt(GameView.WIDTH);
-        targetPosition.y = random.nextInt(GameView.HEIGHT);
-    }
-
+    /**
+     * Draws the bush to the canvas.
+     */
     @Override
     public void addToCanvas() {
         gameView.addOvalToCanvas(position.x, position.y, size, size, 2, true, Color.YELLOW);
-        gameView.addOvalToCanvas(targetPosition.x, targetPosition.y, size, size, 2, false, Color.WHITE);
+        gameView.addOvalToCanvas(endPosition.x, endPosition.y, size, size, 2, false, Color.WHITE);
+    }
+
+    @Override
+    public void updateStatus() {
+        double distance = position.distance(endPosition);
+        if (distance >= speedInPixel) {
+            position.right((endPosition.x - position.x) / distance * speedInPixel);
+            position.down((endPosition.y - position.y) / distance * speedInPixel);
+        } else {
+            setRandomEndPosition();
+        }
+
     }
 
     /**
      * Set position to aim at
      */
-    public void setPatternTargetPosition(){
-        if (this.patternList.size() == 0){
-            this.patternList.addAll(this.movementPatterns.getPattern(this.movementPatterns.getRandomPattern()));
+    public void setRandomEndPosition() {
+        try {
+            endPosition = (Position) getPattern("Zero").get(movementPosition);
+            movementPosition++;
+        } catch (Exception e) {
+            movementPosition = 0;
+
         }
 
-        this.targetPosition.x = this.patternList.get(0).x;
-        this.targetPosition.y = this.patternList.get(0).y;
-        this.patternList.remove(0);
+    }
+    @Override
+    public void updatePosition() {
     }
 }

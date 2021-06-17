@@ -28,6 +28,11 @@ public class Level {
         this.name = name;
     }
 
+    /**
+     * return the Positions of the blocks
+     * @param blockType the block object for which the position should return
+     * @return
+     */
     public LinkedList<Position> level1(String blockType){
         LinkedList<Position> positions = new LinkedList<Position>();
 

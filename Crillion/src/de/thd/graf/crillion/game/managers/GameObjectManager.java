@@ -69,7 +69,6 @@ class GameObjectManager {
 
 
         this.collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight, colorChangingBlock, deadlyBlock, moveableBlock, wallBlock));
-        this.collidableGameObjects.addAll(vanishingBlocks);
         this.ball = new Ball(gameView, collidableGameObjects);
     }
 
@@ -77,6 +76,7 @@ class GameObjectManager {
      * Add and Update the Position from the GameObjects at the Canvas
      */
     public void updateGameObjects() {
+
 
         gameObjects.clear();
         gameObjects.add(background);

@@ -22,7 +22,8 @@ public class GamePlayManager {
     private final Random random;
     private boolean listHasBeenDeleted;
     private final Level levelEins;
-    private final VanishingBlock vanishingBlock;
+    private boolean nextLevel;
+    private boolean delVanHitbox;
 
     /**
      * Create the gameplay manager
@@ -37,15 +38,18 @@ public class GamePlayManager {
         this.random = new Random();
         this.listHasBeenDeleted = false;
         this.levelEins = new Level(1);
-        this.vanishingBlock = new VanishingBlock(gameView);
+        this.nextLevel = true;
+        this.delVanHitbox = false;
     }
 
     /**
      * Updates the action of the game, new objects spawn
      */
     public void updateGamePlay() {
-        //createLevel();
-        spawnAndDestroyVanishingblock();
+        if (nextLevel) {
+            createLevel();
+        }
+        //spawnAndDestroyVanishingblock();
     }
 
     /**
@@ -79,15 +83,24 @@ public class GamePlayManager {
      * @param vanishingBlock Object to be removed from the window.
      */
     public void destroy(VanishingBlock vanishingBlock) {
-        gameObjectManager.getVanishingBlocks().remove(vanishingBlock);
+        this.gameObjectManager.getVanishingBlocks().remove(vanishingBlock);
+        this.delVanHitbox = true;
     }
 
+    /**
+     * Creates the levels of the game
+     */
     public void createLevel(){
+        System.out.println(this.levelEins.level1("VanishingBlock").size());
         for (Position position : this.levelEins.level1("VanishingBlock")){
-            this.vanishingBlock.getPosition().x = position.x;
-            this.vanishingBlock.getPosition().y = position.y;
+            VanishingBlock vanishingBlock = new VanishingBlock(gameView);
+            vanishingBlock.getPosition().x = position.x;
+            vanishingBlock.getPosition().y = position.y;
+            vanishingBlock.setGamePlayManager(this);
             this.gameObjectManager.getVanishingBlocks().add(vanishingBlock);
+            this.gameObjectManager.getBall().getObjectsToCollideWith().add(vanishingBlock);
         }
+        this.nextLevel = false;
     }
 }
 
