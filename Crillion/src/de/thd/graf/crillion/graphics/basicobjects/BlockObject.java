@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Superclass for the block objects
  */
-public abstract class BlockObjects extends CollidableGameObject implements Cloneable {
+public abstract class BlockObject extends CollidableGameObject implements Cloneable {
 
     protected String blockImage;
 
@@ -17,9 +17,9 @@ public abstract class BlockObjects extends CollidableGameObject implements Clone
      *
      * @param gameView get important code from GameView
      */
-    protected BlockObjects(GameView gameView) {
+    protected BlockObject(GameView gameView) {
         super(gameView);
-        this.size = 2;
+        this.size = 3;
         this.rotation = 0;
         this.width = 11 * (int) size;
         this.height = 11 * (int) size;
@@ -48,8 +48,8 @@ public abstract class BlockObjects extends CollidableGameObject implements Clone
      * @return
      */
     @Override
-    public BlockObjects clone() {
-        return (BlockObjects) super.clone();
+    public BlockObject clone() {
+        return (BlockObject) super.clone();
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class BlockObjects extends CollidableGameObject implements Clone
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        BlockObjects that = (BlockObjects) o;
+        BlockObject that = (BlockObject) o;
         return Objects.equals(hitBox, that.hitBox);
     }
 

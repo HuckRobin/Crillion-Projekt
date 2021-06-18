@@ -1,9 +1,12 @@
 package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.gameview.GameView;
+import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
-import de.thd.graf.crillion.graphics.dynamicobjects.*;
+import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
+import de.thd.graf.crillion.graphics.dynamicobjects.MovableBlock;
+import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
 import de.thd.graf.crillion.graphics.scoreobjects.Scoreboard;
 import de.thd.graf.crillion.graphics.staticobjects.*;
 
@@ -17,26 +20,19 @@ import java.util.List;
 
 class GameObjectManager {
 
-    private final GameView gameView;
-
     private final Background background;
     private final Ball ball;
-    private final ColorChangingBlock colorChangingBlock;
-    private final DeadlyBlock deadlyBlock;
-    private final MoveableBlock moveableBlock;
-    private final WallBlock wallBlock;
     private final Scoreboard scoreboard;
    private final BoundaryTop boundaryTop;
    private final BoundaryLeft boundaryLeft;
    private final BoundaryBottom boundaryBottom;
    private final BoundaryRight boundaryRight;
-   private final FollowerBall followerBall;
-   private final RandomBall randomBall;
 
     private final LinkedList<VanishingBlock> vanishingBlocks;
-    private final LinkedList<GameObject> gameObjects;
     private final LinkedList<Scoreboard> scoreboards;
+    private final LinkedList<BlockObject> blockObjects;
 
+    LinkedList<GameObject> gameObjects;
     ArrayList<CollidableGameObject> collidableGameObjects;
 
     /**
@@ -45,30 +41,26 @@ class GameObjectManager {
      * @param gameView gameView get important Code from GameView
      */
     public GameObjectManager(GameView gameView) {
-        this.gameView = gameView;
         this.background = new Background(gameView);
-        this.colorChangingBlock = new ColorChangingBlock(gameView);
-        this.deadlyBlock = new DeadlyBlock(gameView);
-        this.moveableBlock = new MoveableBlock(gameView);
-        this.wallBlock = new WallBlock(gameView);
         this.scoreboard = new Scoreboard(gameView);
         this.boundaryTop = new BoundaryTop(gameView);
         this.boundaryLeft = new BoundaryLeft(gameView);
         this.boundaryBottom = new BoundaryBottom(gameView);
         this.boundaryRight = new BoundaryRight(gameView);
-        this.randomBall = new RandomBall(gameView);
-        this.followerBall = new FollowerBall(gameView, randomBall);
 
 
 
         this.vanishingBlocks = new LinkedList<>();
+        this.blockObjects = new LinkedList<>();
+        this.blockObjects.addAll(vanishingBlocks);
 
         this.gameObjects = new LinkedList<>();
         this.scoreboards = new LinkedList<>(List.of(scoreboard));
+
         this.collidableGameObjects = new ArrayList<>();
+        this.collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight));
+        this.collidableGameObjects.addAll(blockObjects);
 
-
-        this.collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom,boundaryRight, colorChangingBlock, deadlyBlock, moveableBlock, wallBlock));
         this.ball = new Ball(gameView, collidableGameObjects);
     }
 
@@ -81,11 +73,9 @@ class GameObjectManager {
         gameObjects.clear();
         gameObjects.add(background);
         gameObjects.addAll(scoreboards);
-        gameObjects.addAll(vanishingBlocks);
         gameObjects.addAll(List.of(boundaryBottom, boundaryTop, boundaryRight, boundaryLeft));
-        gameObjects.addAll(List.of(colorChangingBlock, deadlyBlock, moveableBlock, wallBlock, ball));
-        gameObjects.add(followerBall);
-        gameObjects.add(randomBall);
+        gameObjects.addAll(blockObjects);
+        gameObjects.add(ball);
 
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
@@ -135,5 +125,13 @@ class GameObjectManager {
      */
     public ArrayList<CollidableGameObject> getCollidableGameObjects() {
         return collidableGameObjects;
+    }
+
+    /**
+     * Get the blockObjects
+     * @return
+     */
+    public LinkedList<BlockObject> getBlockObjects() {
+        return blockObjects;
     }
 }

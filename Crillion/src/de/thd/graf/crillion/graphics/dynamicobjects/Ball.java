@@ -1,6 +1,7 @@
 package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
+import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidingGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
@@ -62,7 +63,7 @@ public class Ball extends CollidingGameObject {
         this.purpleBall = "Purple-Ball.png";
         this.shooting = false;
         this.speedInPixel = 2;
-        this.size = 1;
+        this.size = 1.25;
         this.width = 11 * (int) size;
         this.height = 11 * (int) size;
         this.hitBox.width = (int) (this.width - 1 * size);
@@ -91,6 +92,7 @@ public class Ball extends CollidingGameObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
+
     }
 
     /**
@@ -206,6 +208,11 @@ public class Ball extends CollidingGameObject {
         return purpleBall;
     }
 
+    public boolean isChangeDirectionTopToBottom() {
+        return changeDirectionTopToBottom;
+    }
 
-
+    public void setChangeDirectionTopToBottom(boolean changeDirectionTopToBottom) {
+        this.changeDirectionTopToBottom = changeDirectionTopToBottom;
+    }
 }

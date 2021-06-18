@@ -1,14 +1,14 @@
 package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
+import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 /**
  * A block which is fixed
  */
-public class WallBlock extends BlockObjects {
+public class WallBlock extends BlockObject {
 
     /**
      * Create a WallBlock

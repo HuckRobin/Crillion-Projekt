@@ -62,4 +62,8 @@ public abstract class CollidableGameObject extends GameObject implements Cloneab
     public int hashCode() {
         return Objects.hash(super.hashCode(), hitBox);
     }
+
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
 }

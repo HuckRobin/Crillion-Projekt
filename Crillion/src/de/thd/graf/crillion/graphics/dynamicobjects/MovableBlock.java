@@ -2,14 +2,11 @@ package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.*;
-import de.thd.graf.crillion.graphics.staticobjects.Background;
-
-import java.awt.*;
 
 /**
  * Block which moves when it get hit by the {@link Ball} with the same Color
  */
-public class MoveableBlock extends BlockObjects implements MovingGameObject {
+public class MovableBlock extends BlockObject implements MovingGameObject {
 
     private boolean flyFromRightToLeft;
 
@@ -18,7 +15,7 @@ public class MoveableBlock extends BlockObjects implements MovingGameObject {
      *
      * @param gameView get important Code from GameView
      */
-    public MoveableBlock(GameView gameView) {
+    public MovableBlock(GameView gameView) {
         super(gameView);
         this.position = new Position(50, 60 + 1);
         this.speedInPixel = 1;

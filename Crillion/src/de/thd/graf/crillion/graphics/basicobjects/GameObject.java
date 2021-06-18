@@ -101,4 +101,8 @@ public abstract class GameObject implements Cloneable {
     public String toString() {
         return getClass().getSimpleName() + ": " + position;
     }
+
+    public int getHeight() {
+        return height;
+    }
 }

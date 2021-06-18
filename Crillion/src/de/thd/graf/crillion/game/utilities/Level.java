@@ -1,11 +1,7 @@
 package de.thd.graf.crillion.game.utilities;
 
-import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.BlockObjects;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
-import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,15 +35,25 @@ public class Level {
         switch(blockType){
             case "VanishingBlock":
                 positions.add(new Position(100,100));
-                positions.addAll(List.of(new Position(250,250), new Position(300,300)));
+                positions.addAll(List.of(
+                        new Position(250,250),
+                        new Position(300,300)));
                 return positions;
             case "WallBlock":
+                positions.addAll(List.of(
+                        new Position(300, 400)));
                 return positions;
             case "ColorChangingBlock":
+                positions.addAll(List.of(
+                        new Position(200, 500)));
                 return positions;
             case "DeadlyBlock":
+                positions.addAll(List.of(
+                        new Position(600, 300)));
                 return positions;
-            case "MoveableBlock":
+            case "MovableBlock":
+                positions.addAll(List.of(
+                        new Position(800, 150)));
                 return positions;
             default:
                 return null;
