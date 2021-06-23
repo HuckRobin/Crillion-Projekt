@@ -20,6 +20,7 @@ public class GamePlayManager {
 
     private final GameView gameView;
     private final GameObjectManager gameObjectManager;
+    private final InputManager inputManager;
     private final Level level;
     private boolean nextLevel;
     ArrayList<GameObject> deletObjects;
@@ -37,6 +38,7 @@ public class GamePlayManager {
         this.level = new Level(1);
         this.nextLevel = true;
         this.deletObjects = new ArrayList<>();
+        this.inputManager = new InputManager(gameView, gameObjectManager.getBall());
     }
 
     /**
@@ -61,9 +63,15 @@ public class GamePlayManager {
 
     public void bounceBallBack(BlockObject blockObject){
         if(this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y, blockObject.getPosition().x, blockObject.getPosition().y + blockObject.getHeight())) {
-            System.out.println("Treffer");
+            this.gameObjectManager.getBall().setLeftSideHit(true);
+            this.gameObjectManager.getBall().setPauseUserInput(true);
         }
-        else if(this.gameObjectManager.getBall().isChangeDirectionTopToBottom()) {
+        else if(this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y, blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y + blockObject.getHeight())) {
+            this.gameObjectManager.getBall().setRightSideHit(true);
+            this.gameObjectManager.getBall().setPauseUserInput(true);
+        }
+
+        if(this.gameObjectManager.getBall().isChangeDirectionTopToBottom()) {
             this.gameObjectManager.getBall().setChangeDirectionTopToBottom(false);
         }
         else {

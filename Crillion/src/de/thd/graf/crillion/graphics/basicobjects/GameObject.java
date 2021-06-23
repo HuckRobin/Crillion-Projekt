@@ -105,4 +105,8 @@ public abstract class GameObject implements Cloneable {
     public int getHeight() {
         return height;
     }
+
+    public int getWidth() {
+        return width;
+    }
 }

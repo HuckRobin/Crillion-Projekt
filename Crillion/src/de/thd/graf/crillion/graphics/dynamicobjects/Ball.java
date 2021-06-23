@@ -1,7 +1,6 @@
 package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidingGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
@@ -32,6 +31,10 @@ public class Ball extends CollidingGameObject {
     private final BoundaryRight boundaryRight;
     private final BoundaryTop boundaryTop;
     private final BoundaryBottom boundaryBottom;
+    private boolean pauseUserInput;
+    private boolean leftSideHit;
+    private boolean rightSideHit;
+    private int bounceIndex;
 
     private Status status;
     private Direction direction;
@@ -69,6 +72,10 @@ public class Ball extends CollidingGameObject {
         this.hitBox.width = (int) (this.width - 1 * size);
         this.hitBox.height = (int) (this.height - 1 * size);
         this.changeDirectionTopToBottom = false;
+        this.pauseUserInput = false;
+        this.leftSideHit = false;
+        this.rightSideHit = false;
+        this.bounceIndex = 0;
 
         this.boundaryTop = (BoundaryTop) objectsToCollideWith.get(0);
         this.boundaryLeft = (BoundaryLeft) objectsToCollideWith.get(1);
@@ -152,16 +159,36 @@ public class Ball extends CollidingGameObject {
      * Updates the position of the ball so that the ball is constantly moving
      */
     public void updatePositition() {
-        if (changeDirectionTopToBottom) {
-            this.down();
-        } else {
-            this.up();
+        if (leftSideHit && this.bounceIndex <= 10){
+            left();
+            this.bounceIndex++;
         }
+        else if(rightSideHit && this.bounceIndex <= 10){
+            right();
+            this.bounceIndex++;
+        }
+        else {
+            this.leftSideHit = false;
+            this.rightSideHit = false;
+            this.bounceIndex = 0;
+            this.pauseUserInput = false;
+            moveTopToBottom();
+        }
+
+
 
         if (collidesWith(boundaryTop)) {
             this.changeDirectionTopToBottom = true;
         } else if (collidesWith(boundaryBottom)) {
             this.changeDirectionTopToBottom = false;
+        }
+    }
+
+    public void moveTopToBottom(){
+        if (changeDirectionTopToBottom) {
+            this.down();
+        } else {
+            this.up();
         }
     }
 
@@ -214,5 +241,25 @@ public class Ball extends CollidingGameObject {
 
     public void setChangeDirectionTopToBottom(boolean changeDirectionTopToBottom) {
         this.changeDirectionTopToBottom = changeDirectionTopToBottom;
+    }
+
+    public void setPauseUserInput(boolean pauseUserInput) {
+        this.pauseUserInput = pauseUserInput;
+    }
+
+    public boolean isPauseUserInput() {
+        return pauseUserInput;
+    }
+
+    public boolean isLeftSideHit() {
+        return leftSideHit;
+    }
+
+    public void setLeftSideHit(boolean leftSideHit) {
+        this.leftSideHit = leftSideHit;
+    }
+
+    public void setRightSideHit(boolean rightSideHit) {
+        this.rightSideHit = rightSideHit;
     }
 }

@@ -28,19 +28,30 @@ class InputManager {
 
         for (int keyCode : gedruekteTasten) {
 
-            switch (keyCode) {
-                case KeyEvent.VK_RIGHT:
-                    this.ball.right();
-                    break;
-               case KeyEvent.VK_LEFT:
-                   this.ball.left();
-                   break;
-            }
-
-            if (Ball.DIAGONAL_MOVEMENT == false) {
+            if (this.ball.isPauseUserInput()) {
                 break;
+            } else {
+                switch (keyCode) {
+                    case KeyEvent.VK_RIGHT:
+                        this.ball.right();
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        this.ball.left();
+                        break;
+                }
+
+                if (Ball.DIAGONAL_MOVEMENT == false) {
+                    break;
+                }
             }
         }
     }
 
+    public void pauseUserInput(){
+        this.ball.setPauseUserInput(true);
+      // if (gameView.timerExpired("pauseUserInput", "UserInput")){
+      //     gameView.setTimer("pauseUserInput", "UserInput", 100);
+      //     this.setBreakInput(false);
+      // }
+    }
 }
