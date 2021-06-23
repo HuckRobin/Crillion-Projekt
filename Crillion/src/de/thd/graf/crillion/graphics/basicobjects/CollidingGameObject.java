@@ -50,7 +50,7 @@ public abstract class CollidingGameObject extends CollidableGameObject {
 
     /**
      * Get CollidingGameObjects
-     * @return
+     * @return the objects to collide with
      */
     public ArrayList<CollidableGameObject> getObjectsToCollideWith() {
         return objectsToCollideWith;

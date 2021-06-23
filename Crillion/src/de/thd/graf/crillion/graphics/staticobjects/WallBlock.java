@@ -44,6 +44,7 @@ public class WallBlock extends BlockObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
+        this.gamePlayManager.bounceBallBack(this);
         System.out.println("Hit_Wallblock");
     }
 
@@ -62,8 +63,4 @@ public class WallBlock extends BlockObject {
     @Override
     public void updateStatus() {
     }
-
-    private void changeImage() {
-    }
-
 }

@@ -14,7 +14,7 @@ public class DeadlyBlock extends BlockObject {
     /**
      * Creates a DeadlyBlock
      *
-     * @param gameView
+     * @param gameView wWindow to show the GameObject on.
      */
     public DeadlyBlock(GameView gameView) {
         super(gameView);
@@ -50,12 +50,6 @@ public class DeadlyBlock extends BlockObject {
         System.out.println("Hit_Deadlyblock");
     }
 
-    private void losesOneLifeWhenHit() {
-    }
-
-    private void kill() {
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -70,14 +64,6 @@ public class DeadlyBlock extends BlockObject {
      */
     @Override
     public void updateStatus() {
-    }
-
-
-    /**
-     * @return the block image
-     */
-    public String getBlockImage() {
-        return blockImage;
     }
 
 }

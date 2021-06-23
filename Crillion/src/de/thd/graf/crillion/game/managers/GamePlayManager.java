@@ -3,7 +3,7 @@ package de.thd.graf.crillion.game.managers;
 import de.thd.graf.crillion.game.utilities.Level;
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
-import de.thd.graf.crillion.graphics.basicobjects.GameObject;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.dynamicobjects.MovableBlock;
 import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
@@ -20,25 +20,18 @@ public class GamePlayManager {
 
     private final GameView gameView;
     private final GameObjectManager gameObjectManager;
-    private final InputManager inputManager;
     private final Level level;
     private boolean nextLevel;
-    ArrayList<GameObject> deletObjects;
+    ArrayList<CollidableGameObject> deletObjects;
 
-    /**
-     * Create the gameplay manager
-     *
-     * @param gameView
-     * @param gameObjectManager
-     */
-    public GamePlayManager(GameView gameView, GameObjectManager gameObjectManager) {
+
+    GamePlayManager(GameView gameView, GameObjectManager gameObjectManager) {
 
         this.gameView = gameView;
         this.gameObjectManager = gameObjectManager;
         this.level = new Level(1);
         this.nextLevel = true;
         this.deletObjects = new ArrayList<>();
-        this.inputManager = new InputManager(gameView, gameObjectManager.getBall());
     }
 
     /**
@@ -61,22 +54,25 @@ public class GamePlayManager {
         this.deletObjects.add(vanishingBlock);
     }
 
-    public void bounceBallBack(BlockObject blockObject){
-        if(this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y, blockObject.getPosition().x, blockObject.getPosition().y + blockObject.getHeight())) {
+    /**
+     * Let the ball bounce back from the object that gets hit
+     * @param blockObject block object
+     */
+    public void bounceBallBack(BlockObject blockObject) {
+
+        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y, blockObject.getPosition().x, blockObject.getPosition().y + blockObject.getHeight())) {
             this.gameObjectManager.getBall().setLeftSideHit(true);
             this.gameObjectManager.getBall().setPauseUserInput(true);
-        }
-        else if(this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y, blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y + blockObject.getHeight())) {
+        } else if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y, blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y + blockObject.getHeight())) {
             this.gameObjectManager.getBall().setRightSideHit(true);
             this.gameObjectManager.getBall().setPauseUserInput(true);
         }
 
-        if(this.gameObjectManager.getBall().isChangeDirectionTopToBottom()) {
+        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y, blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y)) {
             this.gameObjectManager.getBall().setChangeDirectionTopToBottom(false);
         }
-        else {
+        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y + blockObject.getHeight(), blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y + blockObject.getHeight()))
             this.gameObjectManager.getBall().setChangeDirectionTopToBottom(true);
-        }
     }
 
     /**

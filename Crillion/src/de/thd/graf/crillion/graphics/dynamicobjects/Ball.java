@@ -18,8 +18,6 @@ import java.util.ArrayList;
 public class Ball extends CollidingGameObject {
     private enum Status {RED, BLUE, GREEN, YELLOW, PURPLE}
 
-    private enum Direction {UP, DOWN,}
-
     private final String blueBall;
     private final String greenBall;
     private final String redBall;
@@ -35,9 +33,6 @@ public class Ball extends CollidingGameObject {
     private boolean leftSideHit;
     private boolean rightSideHit;
     private int bounceIndex;
-
-    private Status status;
-    private Direction direction;
 
     /**
      * Constant to activate diagonal movement
@@ -57,8 +52,7 @@ public class Ball extends CollidingGameObject {
     public Ball(GameView gameView, ArrayList<CollidableGameObject> objectsToCollideWith) {
         super(gameView, objectsToCollideWith);
         this.position = new Position(GameView.WIDTH / 2, GameView.HEIGHT / 2);
-        this.status = Status.RED;
-        this.direction = Direction.UP;
+        Status status = Status.RED;
         this.blueBall = "Blue-Ball.png";
         this.greenBall = "Green-Ball.png";
         this.redBall = "Red-Ball.png";
@@ -144,7 +138,7 @@ public class Ball extends CollidingGameObject {
      */
     @Override
     public void addToCanvas() {
-        if (PLAYER_GRAPHIC == false) {
+        if (!PLAYER_GRAPHIC) {
             if (shooting) {
                 gameView.addTextToCanvas("O", this.position.x, this.position.y, this.size, Color.WHITE, this.rotation);
                 shooting = false;
@@ -155,26 +149,23 @@ public class Ball extends CollidingGameObject {
         gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
     }
 
-    /**
-     * Updates the position of the ball so that the ball is constantly moving
-     */
-    public void updatePositition() {
-        if (leftSideHit && this.bounceIndex <= 10){
+
+    private void updatePositition() {
+        if (leftSideHit && this.bounceIndex <= 10) {
             left();
+            moveTopToBottom();
             this.bounceIndex++;
-        }
-        else if(rightSideHit && this.bounceIndex <= 10){
+        } else if (rightSideHit && this.bounceIndex <= 10) {
             right();
+            moveTopToBottom();
             this.bounceIndex++;
-        }
-        else {
+        } else {
             this.leftSideHit = false;
             this.rightSideHit = false;
             this.bounceIndex = 0;
             this.pauseUserInput = false;
             moveTopToBottom();
         }
-
 
 
         if (collidesWith(boundaryTop)) {
@@ -184,7 +175,7 @@ public class Ball extends CollidingGameObject {
         }
     }
 
-    public void moveTopToBottom(){
+    private void moveTopToBottom() {
         if (changeDirectionTopToBottom) {
             this.down();
         } else {
@@ -235,30 +226,44 @@ public class Ball extends CollidingGameObject {
         return purpleBall;
     }
 
-    public boolean isChangeDirectionTopToBottom() {
-        return changeDirectionTopToBottom;
-    }
 
+    /**
+     * @param changeDirectionTopToBottom boolean changeDirectionTopToBottom
+     */
     public void setChangeDirectionTopToBottom(boolean changeDirectionTopToBottom) {
         this.changeDirectionTopToBottom = changeDirectionTopToBottom;
     }
 
+    /**
+     * Pause the user Input
+     *
+     * @param pauseUserInput blooean pauseUserInput
+     */
     public void setPauseUserInput(boolean pauseUserInput) {
         this.pauseUserInput = pauseUserInput;
     }
 
+    /**
+     * Get the PauseUserInput
+     *
+     * @return the boolean pauseUserInput
+     */
     public boolean isPauseUserInput() {
         return pauseUserInput;
     }
 
-    public boolean isLeftSideHit() {
-        return leftSideHit;
-    }
-
+    /**
+     * Set the boolean leftSideHit
+     * @param leftSideHit boolean leftSideHit
+     */
     public void setLeftSideHit(boolean leftSideHit) {
         this.leftSideHit = leftSideHit;
     }
 
+    /**
+     * Set value of rightSideHit
+     * @param rightSideHit boolean rightSideHit
+     */
     public void setRightSideHit(boolean rightSideHit) {
         this.rightSideHit = rightSideHit;
     }

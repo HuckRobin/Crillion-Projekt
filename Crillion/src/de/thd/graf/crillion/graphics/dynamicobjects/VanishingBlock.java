@@ -5,14 +5,11 @@ import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
-import java.util.Random;
 
 /**
  * A block which vanish when it get hit by the {@link Ball}
  */
 public class VanishingBlock extends BlockObject {
-
-    private Random random;
 
     /**
      * Create a VanishingBlock
@@ -20,8 +17,7 @@ public class VanishingBlock extends BlockObject {
      */
     public VanishingBlock(GameView gameView) {
         super(gameView);
-        this.random = new Random();
-        this.position = new Position(10 + 1 + random.nextInt(GameView.WIDTH - this.width - 10 - 10 - 1), 60 + 1 + random.nextInt(GameView.HEIGHT - 60 - this.height - 10 - 1));
+        this.position = new Position(0,0);
         this.blockImage = "WWWWWWWWWBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
@@ -55,9 +51,6 @@ public class VanishingBlock extends BlockObject {
         System.out.println("Hit_Vanishingblock");
     }
 
-    private void vanishTheBlockWhenHit() {
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -74,10 +67,4 @@ public class VanishingBlock extends BlockObject {
     public void updateStatus() {
     }
 
-    /**
-     * @return the block image
-     */
-    public String getBlockImage() {
-        return blockImage;
-    }
 }

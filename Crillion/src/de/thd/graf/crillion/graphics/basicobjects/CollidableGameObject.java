@@ -32,15 +32,6 @@ public abstract class CollidableGameObject extends GameObject implements Cloneab
     public abstract void reactToCollision(CollidableGameObject otherObject);
 
     /**
-     * Clones the object.
-     * @return
-     */
-    @Override
-    public CollidableGameObject clone(){
-        return (CollidableGameObject) super.clone();
-    }
-
-    /**
      * Compares the objects hitboxes.
      * @param o object.
      * @return true or false if equal or not equal.

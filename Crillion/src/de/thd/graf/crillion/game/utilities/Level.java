@@ -27,10 +27,10 @@ public class Level {
     /**
      * return the Positions of the blocks
      * @param blockType the block object for which the position should return
-     * @return
+     * @return Return the Position of the block object
      */
     public LinkedList<Position> level1(String blockType){
-        LinkedList<Position> positions = new LinkedList<Position>();
+        LinkedList<Position> positions = new LinkedList<>();
 
         switch(blockType){
             case "VanishingBlock":
@@ -48,8 +48,8 @@ public class Level {
                         new Position(200, 500)));
                 return positions;
             case "DeadlyBlock":
-                positions.addAll(List.of(
-                        new Position(600, 300)));
+                //positions.addAll(List.of(
+                //        new Position(600, 300)));
                 return positions;
             case "MovableBlock":
                 positions.addAll(List.of(

@@ -2,7 +2,6 @@ package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
-import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.*;
  */
 public class Background extends CollidableGameObject {
 
-    private double lineWeight;
+    private final double lineWeight;
     /**
      * Creat the background with the boundary
      */

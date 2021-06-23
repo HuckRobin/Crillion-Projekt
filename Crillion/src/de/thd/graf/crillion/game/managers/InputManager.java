@@ -13,7 +13,7 @@ class InputManager {
     /**
      * Create the Input Manager
      * @param gameView get important code from GameView
-     * @param ball
+     * @param ball The ball where the user input has impact of it
      */
     public InputManager(GameView gameView, Ball ball) {
         this.gameView = gameView;
@@ -40,18 +40,10 @@ class InputManager {
                         break;
                 }
 
-                if (Ball.DIAGONAL_MOVEMENT == false) {
+                if (!Ball.DIAGONAL_MOVEMENT) {
                     break;
                 }
             }
         }
-    }
-
-    public void pauseUserInput(){
-        this.ball.setPauseUserInput(true);
-      // if (gameView.timerExpired("pauseUserInput", "UserInput")){
-      //     gameView.setTimer("pauseUserInput", "UserInput", 100);
-      //     this.setBreakInput(false);
-      // }
     }
 }

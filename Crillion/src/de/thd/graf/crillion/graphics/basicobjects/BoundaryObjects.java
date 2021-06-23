@@ -9,7 +9,6 @@ import java.awt.*;
  */
 public abstract class BoundaryObjects extends CollidableGameObject {
 
-    protected Rectangle frame;
     protected int lineWeight;
     protected boolean filled;
 

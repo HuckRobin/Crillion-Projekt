@@ -67,9 +67,6 @@ public class MovableBlock extends BlockObject implements MovingGameObject {
 
     }
 
-    private void move() {
-    }
-
     /**
      * Update the Position when the Block get hits by the ball
      */
@@ -77,21 +74,15 @@ public class MovableBlock extends BlockObject implements MovingGameObject {
     public void updatePosition() {
         if (position.x == GameView.WIDTH - width - 10) {
             flyFromRightToLeft = false;
-        } else if (position.x == GameView.WIDTH - GameView.WIDTH + 10) {
+        } else if (position.x == 10) {
             flyFromRightToLeft = true;
         }
 
-        if (flyFromRightToLeft == true) {
+        if (flyFromRightToLeft) {
             position.right(this.speedInPixel);
         } else {
             position.left(this.speedInPixel);
         }
     }
 
-    /**
-     * @return the block image.
-     */
-    public String getBlockImage() {
-        return blockImage;
-    }
 }
