@@ -4,7 +4,7 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 
-class Highscore extends ScoreObjects {
+public class Highscore extends ScoreObjects {
     /**
      * Create the Level object
      * @param gameView get important Code from GameView
@@ -21,6 +21,7 @@ class Highscore extends ScoreObjects {
      */
     @Override
     public void addToCanvas() {
+        this.name = "Highscore:" + this.scoreNum;
         gameView.addTextToCanvas(this.name, this.position.x - this.name.length() * this.size, this.position.y,
                 this.size, this.color, this.rotation);
     }

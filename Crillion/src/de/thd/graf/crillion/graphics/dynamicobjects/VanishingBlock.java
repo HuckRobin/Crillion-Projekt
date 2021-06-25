@@ -80,6 +80,7 @@ public class VanishingBlock extends BlockObject {
     }
 
     private void addPointsToScore(){
+        this.gamePlayManager.getPlayer().score += 100;
     }
 
     public void setCreateExplosion(boolean createExplosion) {

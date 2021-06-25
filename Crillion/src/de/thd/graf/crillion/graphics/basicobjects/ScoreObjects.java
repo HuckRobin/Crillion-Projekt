@@ -38,4 +38,12 @@ public abstract class ScoreObjects extends GameObject{
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Get the value of the score
+     * @return scoreNum
+     */
+    public int getScoreNum() {
+        return scoreNum;
+    }
 }

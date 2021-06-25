@@ -1,5 +1,7 @@
 package de.thd.graf.crillion.game.utilities;
 
+import de.thd.graf.crillion.graphics.scoreobjects.Score;
+
 /**
  * Represents the player of the game
  */
@@ -22,11 +24,17 @@ public class Player {
     public Level level;
 
     /**
+     * Highscore of the player
+     */
+    public int highscore;
+
+    /**
      * Creates a player with lives set to maximum an a score of 5.
      */
     public Player() {
         this.lives = MAXIMUM_NUMBER_OF_LIVES;
         this.score = 0;
+        this.highscore = 0;
     }
 
 }

@@ -29,6 +29,7 @@ public class Score extends ScoreObjects {
      */
     @Override
     public void addToCanvas() {
+        this.name = "Score:" + this.scoreNum;
         gameView.addTextToCanvas(this.name, this.position.x - this.name.length() * this.size, this.position.y,
                 this.size, this.color, this.rotation);
     }

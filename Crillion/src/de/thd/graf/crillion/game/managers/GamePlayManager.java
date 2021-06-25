@@ -39,7 +39,7 @@ public class GamePlayManager {
      * Updates the action of the game, new objects spawn
      */
     public void updateGamePlay() {
-        updatePlayerLifes();
+        updatePlayerLives();
         updateScore();
         if (nextLevel) {
             createLevel();
@@ -128,12 +128,17 @@ public class GamePlayManager {
         this.nextLevel = false;
     }
 
-    private void updatePlayerLifes (){
+    private void updatePlayerLives(){
         this.gameObjectManager.getScoreboard().getLives().setScoreNum(player.lives);
     }
 
     private void updateScore(){
+
         this.gameObjectManager.getScoreboard().getScore().setScoreNum(player.score);
+        if(this.player.score > this.player.highscore){
+            this.player.highscore = this.player.score;
+            this.gameObjectManager.getScoreboard().getHighscore().setScoreNum(player.highscore);
+        }
     }
 
     /**
