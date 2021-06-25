@@ -93,7 +93,10 @@ public class Ball extends CollidingGameObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-
+        if (collidesWith(boundaryLeft) || collidesWith(boundaryRight)) {
+        } else {
+            this.gameView.playSound("ball_bounce_sound.wav", false);
+        }
     }
 
     /**
@@ -254,6 +257,7 @@ public class Ball extends CollidingGameObject {
 
     /**
      * Set the boolean leftSideHit
+     *
      * @param leftSideHit boolean leftSideHit
      */
     public void setLeftSideHit(boolean leftSideHit) {
@@ -262,6 +266,7 @@ public class Ball extends CollidingGameObject {
 
     /**
      * Set value of rightSideHit
+     *
      * @param rightSideHit boolean rightSideHit
      */
     public void setRightSideHit(boolean rightSideHit) {

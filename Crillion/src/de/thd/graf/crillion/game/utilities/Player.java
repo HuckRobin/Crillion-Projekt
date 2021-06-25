@@ -22,10 +22,11 @@ public class Player {
     public Level level;
 
     /**
-     * Creates a player with lives set to maximum an a score of 0.
+     * Creates a player with lives set to maximum an a score of 5.
      */
     public Player() {
         this.lives = MAXIMUM_NUMBER_OF_LIVES;
+        this.score = 0;
     }
 
 }

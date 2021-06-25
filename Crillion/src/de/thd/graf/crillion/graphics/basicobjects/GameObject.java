@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Super class for the game objects
  */
-public abstract class GameObject implements Cloneable {
+public abstract class GameObject {
 
     protected GameView gameView;
     protected Position position;
@@ -73,10 +73,18 @@ public abstract class GameObject implements Cloneable {
         return getClass().getSimpleName() + ": " + position;
     }
 
+    /**
+     * get the height
+     * @return height
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Return the width
+     * @return width
+     */
     public int getWidth() {
         return width;
     }

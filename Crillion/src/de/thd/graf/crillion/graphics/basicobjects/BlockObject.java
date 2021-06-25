@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Superclass for the block objects
  */
-public abstract class BlockObject extends CollidableGameObject implements Cloneable {
+public abstract class BlockObject extends CollidableGameObject {
 
     protected String blockImage;
 

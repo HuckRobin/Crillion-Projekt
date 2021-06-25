@@ -4,7 +4,7 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 
-class Lives extends ScoreObjects {
+public class Lives extends ScoreObjects {
 
     /**
      * Create the Lives object
@@ -13,7 +13,7 @@ class Lives extends ScoreObjects {
     public Lives(GameView gameView){
         super(gameView);
         this.position = new Position(300, 0);
-        this.scoreNum = 5;
+        this.scoreNum = 0;
         this.name = "Lives:";
     }
 
@@ -36,6 +36,5 @@ class Lives extends ScoreObjects {
      */
     @Override
     public void updateStatus() {
-
     }
 }

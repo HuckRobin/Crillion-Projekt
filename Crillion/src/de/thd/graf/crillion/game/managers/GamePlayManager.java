@@ -1,8 +1,8 @@
 package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.game.utilities.Level;
+import de.thd.graf.crillion.game.utilities.Player;
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.dynamicobjects.MovableBlock;
@@ -20,7 +20,7 @@ public class GamePlayManager {
 
     private final GameView gameView;
     private final GameObjectManager gameObjectManager;
-    private final Level level;
+    private final Player player;
     private boolean nextLevel;
     ArrayList<CollidableGameObject> deletObjects;
 
@@ -29,7 +29,8 @@ public class GamePlayManager {
 
         this.gameView = gameView;
         this.gameObjectManager = gameObjectManager;
-        this.level = new Level(1);
+        this.player = new Player();
+        this.player.level = new Level(1);
         this.nextLevel = true;
         this.deletObjects = new ArrayList<>();
     }
@@ -38,6 +39,8 @@ public class GamePlayManager {
      * Updates the action of the game, new objects spawn
      */
     public void updateGamePlay() {
+        updatePlayerLifes();
+        updateScore();
         if (nextLevel) {
             createLevel();
         }
@@ -56,22 +59,24 @@ public class GamePlayManager {
 
     /**
      * Let the ball bounce back from the object that gets hit
-     * @param blockObject block object
+     * @param collidableGameObject block object
      */
-    public void bounceBallBack(BlockObject blockObject) {
+    public void bounceBallBack(CollidableGameObject collidableGameObject) {
 
-        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y, blockObject.getPosition().x, blockObject.getPosition().y + blockObject.getHeight())) {
+        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(collidableGameObject.getPosition().x, collidableGameObject.getPosition().y, collidableGameObject.getPosition().x, collidableGameObject.getPosition().y + collidableGameObject.getHeight())) {
             this.gameObjectManager.getBall().setLeftSideHit(true);
             this.gameObjectManager.getBall().setPauseUserInput(true);
-        } else if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y, blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y + blockObject.getHeight())) {
+        }
+        else if (this.gameObjectManager.getBall().getHitBox().intersectsLine(collidableGameObject.getPosition().x + collidableGameObject.getWidth(), collidableGameObject.getPosition().y, collidableGameObject.getPosition().x + collidableGameObject.getWidth(), collidableGameObject.getPosition().y + collidableGameObject.getHeight())) {
             this.gameObjectManager.getBall().setRightSideHit(true);
             this.gameObjectManager.getBall().setPauseUserInput(true);
         }
 
-        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y, blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y)) {
+        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(collidableGameObject.getPosition().x, collidableGameObject.getPosition().y, collidableGameObject.getPosition().x + collidableGameObject.getWidth(), collidableGameObject.getPosition().y)) {
             this.gameObjectManager.getBall().setChangeDirectionTopToBottom(false);
         }
-        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(blockObject.getPosition().x, blockObject.getPosition().y + blockObject.getHeight(), blockObject.getPosition().x + blockObject.getWidth(), blockObject.getPosition().y + blockObject.getHeight()))
+
+        if (this.gameObjectManager.getBall().getHitBox().intersectsLine(collidableGameObject.getPosition().x, collidableGameObject.getPosition().y + collidableGameObject.getHeight(), collidableGameObject.getPosition().x + collidableGameObject.getWidth(), collidableGameObject.getPosition().y + collidableGameObject.getHeight()))
             this.gameObjectManager.getBall().setChangeDirectionTopToBottom(true);
     }
 
@@ -79,8 +84,8 @@ public class GamePlayManager {
      * Creates the levels of the game
      */
     public void createLevel(){
-        System.out.println(this.level.level1("VanishingBlock").size());
-        for (Position position : this.level.level1("VanishingBlock")){
+        this.gameObjectManager.getScoreboard().getCurrentLevel().setScoreNum(this.player.level.name);
+        for (Position position : this.player.level.level1("VanishingBlock")){
             VanishingBlock vanishingBlock = new VanishingBlock(gameView);
             vanishingBlock.getPosition().x = position.x;
             vanishingBlock.getPosition().y = position.y;
@@ -88,7 +93,7 @@ public class GamePlayManager {
             this.gameObjectManager.getBlockObjects().add(vanishingBlock);
             this.gameObjectManager.getBall().getObjectsToCollideWith().add(vanishingBlock);
         }
-        for (Position position : this.level.level1("WallBlock")){
+        for (Position position : this.player.level.level1("WallBlock")){
             WallBlock wallBlock = new WallBlock(gameView);
             wallBlock.getPosition().x = position.x;
             wallBlock.getPosition().y = position.y;
@@ -96,7 +101,7 @@ public class GamePlayManager {
             this.gameObjectManager.getBlockObjects().add(wallBlock);
             this.gameObjectManager.getBall().getObjectsToCollideWith().add(wallBlock);
         }
-        for (Position position : this.level.level1("ColorChangingBlock")){
+        for (Position position : this.player.level.level1("ColorChangingBlock")){
             ColorChangingBlock colorChangingBlock = new ColorChangingBlock(gameView);
            colorChangingBlock.getPosition().x = position.x;
            colorChangingBlock.getPosition().y = position.y;
@@ -104,7 +109,7 @@ public class GamePlayManager {
             this.gameObjectManager.getBlockObjects().add(colorChangingBlock);
             this.gameObjectManager.getBall().getObjectsToCollideWith().add(colorChangingBlock);
         }
-        for (Position position : this.level.level1("DeadlyBlock")){
+        for (Position position : this.player.level.level1("DeadlyBlock")){
             DeadlyBlock deadlyBlock = new DeadlyBlock(gameView);
             deadlyBlock.getPosition().x = position.x;
             deadlyBlock.getPosition().y = position.y;
@@ -112,7 +117,7 @@ public class GamePlayManager {
             this.gameObjectManager.getBlockObjects().add(deadlyBlock);
             this.gameObjectManager.getBall().getObjectsToCollideWith().add(deadlyBlock);
         }
-        for (Position position : this.level.level1("MovableBlock")){
+        for (Position position : this.player.level.level1("MovableBlock")){
             MovableBlock movableBlock = new MovableBlock(gameView);
             movableBlock.getPosition().x = position.x;
             movableBlock.getPosition().y = position.y;
@@ -121,6 +126,22 @@ public class GamePlayManager {
             this.gameObjectManager.getBall().getObjectsToCollideWith().add(movableBlock);
         }
         this.nextLevel = false;
+    }
+
+    private void updatePlayerLifes (){
+        this.gameObjectManager.getScoreboard().getLives().setScoreNum(player.lives);
+    }
+
+    private void updateScore(){
+        this.gameObjectManager.getScoreboard().getScore().setScoreNum(player.score);
+    }
+
+    /**
+     * Get the player
+     * @return
+     */
+    public Player getPlayer() {
+        return player;
     }
 }
 

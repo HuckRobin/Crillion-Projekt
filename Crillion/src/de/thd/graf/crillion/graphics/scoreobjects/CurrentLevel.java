@@ -17,7 +17,7 @@ public class CurrentLevel extends ScoreObjects {
   super(gameView);
   this.position = new Position(0, 0);
   this.scoreNum = 0;
-  this.name = "Level:" + this.scoreNum;
+  this.name = "Level:";
  }
 
  /**
@@ -25,7 +25,7 @@ public class CurrentLevel extends ScoreObjects {
   */
  @Override
  public void addToCanvas() {
-  gameView.addTextToCanvas(this.name, this.position.x, this.position.y,this.size, this.color, this.rotation);
+  gameView.addTextToCanvas(this.name + this.scoreNum, this.position.x, this.position.y,this.size, this.color, this.rotation);
  }
 
  /**

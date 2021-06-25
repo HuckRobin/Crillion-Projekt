@@ -23,4 +23,19 @@ public abstract class ScoreObjects extends GameObject{
         this.color = Color.WHITE;
     }
 
+    /**
+     * Set the score number
+     * @param scoreNum score number
+     */
+    public void setScoreNum(int scoreNum) {
+        this.scoreNum = scoreNum;
+    }
+
+    /**
+     * Set the name of the object
+     * @param name name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }

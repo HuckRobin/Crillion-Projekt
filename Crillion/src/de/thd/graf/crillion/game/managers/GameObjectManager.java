@@ -5,7 +5,6 @@ import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.GameObject;
 import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
-import de.thd.graf.crillion.graphics.dynamicobjects.VanishingBlock;
 import de.thd.graf.crillion.graphics.scoreobjects.Scoreboard;
 import de.thd.graf.crillion.graphics.staticobjects.*;
 
@@ -25,8 +24,8 @@ class GameObjectManager {
     private final BoundaryLeft boundaryLeft;
     private final BoundaryBottom boundaryBottom;
     private final BoundaryRight boundaryRight;
+    private final Scoreboard scoreboard;
 
-    private final LinkedList<Scoreboard> scoreboards;
     private final LinkedList<BlockObject> blockObjects;
 
     LinkedList<GameObject> gameObjects;
@@ -35,19 +34,16 @@ class GameObjectManager {
 
     GameObjectManager(GameView gameView) {
         this.background = new Background(gameView);
-        Scoreboard scoreboard = new Scoreboard(gameView);
+        this.scoreboard = new Scoreboard(gameView);
         this.boundaryTop = new BoundaryTop(gameView);
         this.boundaryLeft = new BoundaryLeft(gameView);
         this.boundaryBottom = new BoundaryBottom(gameView);
         this.boundaryRight = new BoundaryRight(gameView);
 
 
-        LinkedList<VanishingBlock> vanishingBlocks = new LinkedList<>();
         this.blockObjects = new LinkedList<>();
-        this.blockObjects.addAll(vanishingBlocks);
 
         this.gameObjects = new LinkedList<>();
-        this.scoreboards = new LinkedList<>(List.of(scoreboard));
 
         this.collidableGameObjects = new ArrayList<>();
         this.collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom, boundaryRight));
@@ -63,7 +59,7 @@ class GameObjectManager {
 
         gameObjects.clear();
         gameObjects.add(background);
-        gameObjects.addAll(scoreboards);
+        gameObjects.add(scoreboard);
         gameObjects.addAll(List.of(boundaryBottom, boundaryTop, boundaryRight, boundaryLeft));
         gameObjects.addAll(blockObjects);
         gameObjects.add(ball);
@@ -90,5 +86,13 @@ class GameObjectManager {
      */
     public LinkedList<BlockObject> getBlockObjects() {
         return blockObjects;
+    }
+
+    /**
+     * Get the scoreboard
+     * @return
+     */
+    public Scoreboard getScoreboard() {
+        return scoreboard;
     }
 }

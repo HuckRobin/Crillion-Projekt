@@ -45,4 +45,36 @@ public class Scoreboard extends ScoreObjects {
     @Override
     public void updateStatus() {
     }
+
+    /**
+     * Get the Highscore
+     * @return highscore
+     */
+    public Highscore getHighscore() {
+        return highscore;
+    }
+
+    /**
+     * Get the Score
+     * @return score
+     */
+    public Score getScore() {
+        return score;
+    }
+
+    /**
+     * Get the current level
+     * @return level
+     */
+    public CurrentLevel getCurrentLevel() {
+        return currentLevel;
+    }
+
+    /**
+     * Get the player lives
+     * @return lives
+     */
+    public Lives getLives() {
+        return lives;
+    }
 }

@@ -46,7 +46,8 @@ public class DeadlyBlock extends BlockObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        //gamePlayManager.destroy(this);
+        this.gamePlayManager.bounceBallBack(this);
+        loseALife();
         System.out.println("Hit_Deadlyblock");
     }
 
@@ -66,4 +67,7 @@ public class DeadlyBlock extends BlockObject {
     public void updateStatus() {
     }
 
+    private void loseALife(){
+        this.gamePlayManager.getPlayer().lives--;
+    }
 }

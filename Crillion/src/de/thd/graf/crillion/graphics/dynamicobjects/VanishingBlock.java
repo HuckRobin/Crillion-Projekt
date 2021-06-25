@@ -11,6 +11,8 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
  */
 public class VanishingBlock extends BlockObject {
 
+    private boolean createExplosion;
+
     /**
      * Create a VanishingBlock
      * @param gameView get important Code from GameView
@@ -29,6 +31,7 @@ public class VanishingBlock extends BlockObject {
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB";
+        this.createExplosion = false;
 
     }
 
@@ -48,6 +51,7 @@ public class VanishingBlock extends BlockObject {
     public void reactToCollision(CollidableGameObject otherObject) {
         this.gamePlayManager.bounceBallBack(this);
         this.gamePlayManager.destroyVanishingBlock(this);
+        addPointsToScore();
         System.out.println("Hit_Vanishingblock");
     }
 
@@ -56,8 +60,16 @@ public class VanishingBlock extends BlockObject {
      */
     @Override
     public void addToCanvas() {
-        gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
-        addHitBoxToCanvas();
+        if(createExplosion) {
+            if (gameView.timerExpired("blockExplosion", "VanishingBlock")) {
+                gameView.setTimer("blockExplosion", "VanishingBLock", 500);
+                this.gameView.addImageToCanvas("Explosion.png", this.position.x, this.position.y, 1, 0);
+            }
+        }
+        else {
+            gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
+            addHitBoxToCanvas();
+        }
     }
 
     /**
@@ -67,4 +79,10 @@ public class VanishingBlock extends BlockObject {
     public void updateStatus() {
     }
 
+    private void addPointsToScore(){
+    }
+
+    public void setCreateExplosion(boolean createExplosion) {
+        this.createExplosion = createExplosion;
+    }
 }
