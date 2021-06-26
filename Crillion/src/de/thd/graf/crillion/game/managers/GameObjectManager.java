@@ -16,7 +16,7 @@ import java.util.List;
  * This class manages the objects
  */
 
-class GameObjectManager {
+public class GameObjectManager {
 
     private final Background background;
     private final Ball ball;
@@ -28,8 +28,9 @@ class GameObjectManager {
 
     private final LinkedList<BlockObject> blockObjects;
 
-    LinkedList<GameObject> gameObjects;
-    ArrayList<CollidableGameObject> collidableGameObjects;
+    private LinkedList<GameObject> gameObjects;
+    private ArrayList<CollidableGameObject> collidableGameObjectsBall;
+    private ArrayList<CollidableGameObject> collidableGameObjectsMovableBlock;
 
 
     GameObjectManager(GameView gameView) {
@@ -42,14 +43,16 @@ class GameObjectManager {
 
 
         this.blockObjects = new LinkedList<>();
-
         this.gameObjects = new LinkedList<>();
 
-        this.collidableGameObjects = new ArrayList<>();
-        this.collidableGameObjects.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom, boundaryRight));
-        this.collidableGameObjects.addAll(blockObjects);
+        this.collidableGameObjectsMovableBlock = new ArrayList<>();
+        this.collidableGameObjectsMovableBlock.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom, boundaryRight));
 
-        this.ball = new Ball(gameView, collidableGameObjects);
+        this.collidableGameObjectsBall = new ArrayList<>();
+        this.collidableGameObjectsBall.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom, boundaryRight));
+        this.collidableGameObjectsBall.addAll(blockObjects);
+
+        this.ball = new Ball(gameView, collidableGameObjectsBall);
     }
 
     /**
@@ -94,5 +97,29 @@ class GameObjectManager {
      */
     public Scoreboard getScoreboard() {
         return scoreboard;
+    }
+
+    /**
+     * Get the Gameobjcts
+     * @return List of gameobjects
+     */
+    public LinkedList<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    /**
+     * Get the collidable game objcts for the ball
+     * @return collidable game objects
+     */
+    public ArrayList<CollidableGameObject> getCollidableGameObjectsBall() {
+        return collidableGameObjectsBall;
+    }
+
+    /**
+     * Get the collidable game objects for the moveable block
+     * @return
+     */
+    public ArrayList<CollidableGameObject> getCollidableGameObjectsMovableBlock() {
+        return collidableGameObjectsMovableBlock;
     }
 }

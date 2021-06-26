@@ -1,9 +1,10 @@
-package de.thd.graf.crillion.graphics.dynamicobjects;
+package de.thd.graf.crillion.graphics.staticobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
+import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
 
 
 /**
@@ -12,6 +13,7 @@ import de.thd.graf.crillion.graphics.basicobjects.Position;
 public class VanishingBlock extends BlockObject {
 
     private boolean createExplosion;
+    private boolean timerSet;
 
     /**
      * Create a VanishingBlock
@@ -32,6 +34,7 @@ public class VanishingBlock extends BlockObject {
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB";
         this.createExplosion = false;
+        this.timerSet = false;
 
     }
 
@@ -49,10 +52,12 @@ public class VanishingBlock extends BlockObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        this.gamePlayManager.bounceBallBack(this);
-        this.gamePlayManager.destroyVanishingBlock(this);
-        addPointsToScore();
-        System.out.println("Hit_Vanishingblock");
+        if(this.gamePlayManager.getGameObjectManager().getBall().getHitBox().intersects(hitBox)) {
+            this.gamePlayManager.bounceBallBack(this);
+            this.gamePlayManager.destroyVanishingBlock(this);
+            addPointsToScore();
+            System.out.println("Hit_Vanishingblock");
+        }
     }
 
     /**
@@ -61,9 +66,9 @@ public class VanishingBlock extends BlockObject {
     @Override
     public void addToCanvas() {
         if(createExplosion) {
-            if (gameView.timerExpired("blockExplosion", "VanishingBlock")) {
-                gameView.setTimer("blockExplosion", "VanishingBLock", 500);
-                this.gameView.addImageToCanvas("Explosion.png", this.position.x, this.position.y, 1, 0);
+            this.gameView.addImageToCanvas("Explosion64.png", this.position.x, this.position.y, 0.75, 0);
+            if(time()){
+                this.gamePlayManager.getGameObjectManager().getBlockObjects().remove(this);
             }
         }
         else {
@@ -85,5 +90,19 @@ public class VanishingBlock extends BlockObject {
 
     public void setCreateExplosion(boolean createExplosion) {
         this.createExplosion = createExplosion;
+    }
+
+    /**
+     * Check the if the time is Expired
+     * @return boolean
+     */
+    public boolean time() {
+        if(!timerSet) {
+            this.gameView.setTimer("blockExplosion", "VanishingBlock", 200);
+            timerSet = true;
+            return false;
+        } else {
+            return this.gameView.timerExpired("blockExplosion", "VanishingBlock");
+        }
     }
 }

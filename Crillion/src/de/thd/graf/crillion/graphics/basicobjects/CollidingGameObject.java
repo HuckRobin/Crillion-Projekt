@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * An object that can actively collide with other objects, e.g. a shot.
  */
-public abstract class CollidingGameObject extends CollidableGameObject {
+public abstract class CollidingGameObject extends BlockObject{
     protected final ArrayList<CollidableGameObject> objectsToCollideWith;
 
     protected CollidingGameObject(GameView gameView,

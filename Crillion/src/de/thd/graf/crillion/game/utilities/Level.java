@@ -37,7 +37,8 @@ public class Level {
                 positions.add(new Position(100,100));
                 positions.addAll(List.of(
                         new Position(250,250),
-                        new Position(300,150)));
+                        new Position(300,150),
+                        new Position(800, 200)));
                 return positions;
             case "WallBlock":
                 positions.addAll(List.of(
