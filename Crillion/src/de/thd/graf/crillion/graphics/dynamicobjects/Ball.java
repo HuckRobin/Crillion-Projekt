@@ -4,10 +4,7 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidingGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
-import de.thd.graf.crillion.graphics.staticobjects.BoundaryBottom;
-import de.thd.graf.crillion.graphics.staticobjects.BoundaryLeft;
-import de.thd.graf.crillion.graphics.staticobjects.BoundaryRight;
-import de.thd.graf.crillion.graphics.staticobjects.BoundaryTop;
+import de.thd.graf.crillion.graphics.staticobjects.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,13 +13,10 @@ import java.util.ArrayList;
  * The player object. A (color changing) ball which is controlled by the Player.
  */
 public class Ball extends CollidingGameObject {
-    private enum Status {RED, BLUE, GREEN, YELLOW, PURPLE}
+    public enum StatusColor {RED, BLUE, GREEN, YELLOW, PURPLE}
+    private StatusColor statusColor;
 
-    private final String blueBall;
-    private final String greenBall;
-    private final String redBall;
-    private final String yellowBall;
-    private final String purpleBall;
+    private String ballImage;
     private boolean shooting;
     private boolean changeDirectionTopToBottom;
     private final BoundaryLeft boundaryLeft;
@@ -49,15 +43,9 @@ public class Ball extends CollidingGameObject {
      * @param gameView             get important Code from GameView
      * @param objectsToCollideWith Game objects this game object can collide with.
      */
-    public Ball(GameView gameView, ArrayList<CollidableGameObject> objectsToCollideWith) {
+    public Ball(GameView gameView, StatusColor statusColor, ArrayList<CollidableGameObject> objectsToCollideWith) {
         super(gameView, objectsToCollideWith);
         this.position = new Position(GameView.WIDTH / 2, GameView.HEIGHT / 2);
-        Status status = Status.RED;
-        this.blueBall = "Blue-Ball.png";
-        this.greenBall = "Green-Ball.png";
-        this.redBall = "Red-Ball.png";
-        this.yellowBall = "Yellow-Ball.png";
-        this.purpleBall = "Purple-Ball.png";
         this.shooting = false;
         this.speedInPixel = 2;
         this.size = 1.25;
@@ -75,6 +63,25 @@ public class Ball extends CollidingGameObject {
         this.boundaryLeft = (BoundaryLeft) objectsToCollideWith.get(1);
         this.boundaryBottom = (BoundaryBottom) objectsToCollideWith.get(2);
         this.boundaryRight = (BoundaryRight) objectsToCollideWith.get(3);
+
+        switch (statusColor) {
+            case BLUE:
+                this.ballImage = "Blue-Ball.png";
+                break;
+            case RED:
+                this.ballImage = "Red-Ball.png";
+                break;
+            case GREEN:
+                this.ballImage = "Green-Ball.png";
+                break;
+            case PURPLE:
+                this.ballImage = "Purple-Ball.png";
+                break;
+            case YELLOW:
+                this.ballImage = "Yellow-Ball.png";
+                break;
+        }
+        this.statusColor = statusColor;
     }
 
     /**
@@ -95,7 +102,7 @@ public class Ball extends CollidingGameObject {
     public void reactToCollision(CollidableGameObject otherObject) {
         if (collidesWith(boundaryLeft) || collidesWith(boundaryRight)) {
         } else {
-            this.gameView.playSound("ball_bounce_sound.wav", false);
+            this.gameView.playSound("bounce.wav", false);
         }
     }
 
@@ -148,8 +155,7 @@ public class Ball extends CollidingGameObject {
             } else
                 gameView.addTextToCanvas("X", this.position.x, this.position.y, this.size, Color.WHITE, this.rotation);
         } else
-            gameView.addImageToCanvas(this.redBall, this.position.x, this.position.y, this.size, this.rotation);
-        gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
+            gameView.addImageToCanvas(this.ballImage, this.position.x, this.position.y, this.size, this.rotation);
     }
 
 
@@ -194,40 +200,6 @@ public class Ball extends CollidingGameObject {
         updatePositition();
     }
 
-    /**
-     * @return file name
-     */
-    public String getBlueBall() {
-        return blueBall;
-    }
-
-    /**
-     * @return file name
-     */
-    public String getGreenBall() {
-        return greenBall;
-    }
-
-    /**
-     * @return file name
-     */
-    public String getRedBall() {
-        return redBall;
-    }
-
-    /**
-     * @return file name
-     */
-    public String getYellowBall() {
-        return yellowBall;
-    }
-
-    /**
-     * @return file name
-     */
-    public String getPurpleBall() {
-        return purpleBall;
-    }
 
 
     /**
@@ -271,5 +243,42 @@ public class Ball extends CollidingGameObject {
      */
     public void setRightSideHit(boolean rightSideHit) {
         this.rightSideHit = rightSideHit;
+    }
+
+    /**
+     * Get the Color of the ball
+     * @return
+     */
+    public String getBallColor() {
+        return String.valueOf(statusColor);
+    }
+
+    /**
+     * Set the ball color
+     * @param statusColor
+     */
+    public void setStatusColor(String statusColor) {
+        switch (statusColor) {
+            case "BLUE":
+                this.statusColor = StatusColor.BLUE;
+                this.ballImage = "Blue-Ball.png";
+                break;
+            case "RED":
+                this.statusColor = StatusColor.RED;
+                this.ballImage = "Red-Ball.png";
+                break;
+            case "GREEN":
+                this.statusColor = StatusColor.GREEN;
+                this.ballImage = "Green-Ball.png";
+                break;
+            case "PURPLE":
+                this.statusColor = StatusColor.PURPLE;
+                this.ballImage = "Purple-Ball.png";
+                break;
+            case "YELLOW":
+                this.statusColor = StatusColor.YELLOW;
+                this.ballImage = "Yellow-Ball.png";
+                break;
+        }
     }
 }

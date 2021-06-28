@@ -2,6 +2,8 @@ package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.*;
+import de.thd.graf.crillion.graphics.staticobjects.ColorChangingBlock;
+import de.thd.graf.crillion.graphics.staticobjects.VanishingBlock;
 
 import java.util.ArrayList;
 
@@ -13,19 +15,21 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
      public enum Direction {STOP, UP, DOWN, LEFT, RIGHT}
      public Direction direction;
 
-     private enum StopMoving{STOPUP, STOPDOWN, STOPLEFT, STOPRIGHT}
-     private StopMoving stopMoving;
+    public enum StatusColor{RED, BLUE, GREEN, YELLOW, PURPLE}
+    private StatusColor statusColor;
+
      private boolean stopUp;
      private boolean stopDown;
      private boolean stopLeft;
      private boolean stopRight;
+     private int moveIndex;
 
     /**
      * Create a MoveableBlock
      *
      * @param gameView get important Code from GameView
      */
-    public MovableBlock(GameView gameView, ArrayList<CollidableGameObject> objectsToCollideWith) {
+    public MovableBlock(GameView gameView, StatusColor statusColor, ArrayList<CollidableGameObject> objectsToCollideWith) {
         super(gameView, objectsToCollideWith);
         this.position = new Position(50, 60 + 1);
         this.speedInPixel = 1;
@@ -41,11 +45,30 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
                 "WBBBBWBBBBB\n" +
                 "WBBBBBBBBBB\n";
         this.direction = Direction.STOP;
-        this.stopMoving = null;
         this.stopUp = false;
         this.stopDown = false;
         this.stopLeft = false;
         this.stopRight = false;
+        this.moveIndex = 0;
+
+        switch (statusColor) {
+            case BLUE:
+                this.blockImage = this.blockImage;
+                break;
+            case RED:
+                this.blockImage = this.blockImage.replace('B','R');
+                break;
+            case GREEN:
+                this.blockImage = this.blockImage.replace('B','G');
+                break;
+            case PURPLE:
+                this.blockImage = this.blockImage.replace('B', 'P');
+                break;
+            case YELLOW:
+                this.blockImage = this.blockImage.replace('B', 'Y');
+                break;
+        }
+        this.statusColor = statusColor;
     }
 
     /**
@@ -65,7 +88,9 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
         System.out.println("Hit_MovableBlock");
         this.gamePlayManager.bounceBallBack(this);
         hitAObject(otherObject);
-        this.gamePlayManager.moveBlock(this, otherObject);
+        if(otherObject.getClass() != this.getClass()){
+            this.gamePlayManager.moveBlock(this, otherObject);
+        }
     }
 
     /**
@@ -74,7 +99,6 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
-        addHitBoxToCanvas();
     }
 
     /**
@@ -91,23 +115,43 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
     public void updatePosition() {
         switch (direction) {
             case UP:
-               if(!stopUp) {
+               if(!stopUp && this.moveIndex <= 20){
                    this.position.up(1);
+                   this.moveIndex ++;
                }
-                break;
+               else {
+                   this.moveIndex = 0;
+                   this.direction = Direction.STOP;
+               }
+               break;
             case DOWN:
-                if(!stopDown) {
+                if(!stopDown && this.moveIndex <= 20) {
                     this.position.down(1);
+                    this.moveIndex ++;
+                }
+                else {
+                    this.moveIndex = 0;
+                    this.direction = Direction.STOP;
                 }
                 break;
             case LEFT:
-                if(!stopLeft) {
+                if(!stopLeft && this.moveIndex <= 20) {
                     this.position.left(1);
+                    this.moveIndex ++;
+                }
+                else {
+                    this.moveIndex = 0;
+                    this.direction = Direction.STOP;
                 }
                 break;
             case RIGHT:
-                if(!stopRight) {
+                if(!stopRight && this.moveIndex <= 20) {
                     this.position.right(1);
+                    this.moveIndex ++;
+                }
+                else {
+                    this.moveIndex = 0;
+                    this.direction = Direction.STOP;
                 }
                 break;
             case STOP:
@@ -150,5 +194,13 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    /**
+     * Get the color of the block as a String
+     * @return
+     */
+    public String getStatusColor() {
+        return String.valueOf(statusColor);
     }
 }

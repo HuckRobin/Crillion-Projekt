@@ -1,6 +1,8 @@
 package de.thd.graf.crillion.game.managers;
 import de.thd.graf.crillion.gameview.GameView;
 
+import java.awt.*;
+
 /**
  * This class manages the main game loop of the game.
  */
@@ -22,6 +24,7 @@ public class GameLoopManager {
         this.gameObjectManager = new GameObjectManager(gameView);
         this.inputManager = new InputManager(gameView, gameObjectManager.getBall());
         this.gamePlayManager = new GamePlayManager(gameView, gameObjectManager);
+        this.gameView.setColorForBlockImage('P', new Color(51, 31, 102));
     }
 
     /**

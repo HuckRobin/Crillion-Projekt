@@ -26,7 +26,7 @@ public class GameObjectManager {
     private final BoundaryRight boundaryRight;
     private final Scoreboard scoreboard;
 
-    private final LinkedList<BlockObject> blockObjects;
+    private  LinkedList<BlockObject> blockObjects;
 
     private LinkedList<GameObject> gameObjects;
     private ArrayList<CollidableGameObject> collidableGameObjectsBall;
@@ -52,7 +52,7 @@ public class GameObjectManager {
         this.collidableGameObjectsBall.addAll(List.of(boundaryTop, boundaryLeft, boundaryBottom, boundaryRight));
         this.collidableGameObjectsBall.addAll(blockObjects);
 
-        this.ball = new Ball(gameView, collidableGameObjectsBall);
+        this.ball = new Ball(gameView, Ball.StatusColor.RED, collidableGameObjectsBall);
     }
 
     /**

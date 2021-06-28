@@ -44,8 +44,10 @@ public class WallBlock extends BlockObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        this.gamePlayManager.bounceBallBack(this);
-        System.out.println("Hit_Wallblock");
+        if(this.gamePlayManager.getGameObjectManager().getBall().getHitBox().intersects(hitBox)) {
+            this.gamePlayManager.bounceBallBack(this);
+            System.out.println("Hit_Wallblock");
+        }
     }
 
     /**
@@ -54,7 +56,6 @@ public class WallBlock extends BlockObject {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
-        addHitBoxToCanvas();
     }
 
     /**

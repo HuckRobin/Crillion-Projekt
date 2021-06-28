@@ -11,6 +11,8 @@ import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
  * A block which vanish when it get hit by the {@link Ball}
  */
 public class VanishingBlock extends BlockObject {
+    public enum StatusColor{RED, BLUE, GREEN, YELLOW, PURPLE}
+    private StatusColor statusColor;
 
     private boolean createExplosion;
     private boolean timerSet;
@@ -19,7 +21,7 @@ public class VanishingBlock extends BlockObject {
      * Create a VanishingBlock
      * @param gameView get important Code from GameView
      */
-    public VanishingBlock(GameView gameView) {
+    public VanishingBlock(GameView gameView, StatusColor statusColor) {
         super(gameView);
         this.position = new Position(0,0);
         this.blockImage = "WWWWWWWWWBB" +
@@ -35,7 +37,24 @@ public class VanishingBlock extends BlockObject {
                 "\nWBBBBBBBBBB";
         this.createExplosion = false;
         this.timerSet = false;
-
+        switch (statusColor) {
+            case BLUE:
+                this.blockImage = this.blockImage;
+                break;
+            case RED:
+                this.blockImage = this.blockImage.replace('B','R');
+                break;
+            case GREEN:
+                this.blockImage = this.blockImage.replace('B','G');
+                break;
+            case PURPLE:
+                this.blockImage = this.blockImage.replace('B', 'P');
+                break;
+            case YELLOW:
+                this.blockImage = this.blockImage.replace('B', 'Y');
+                break;
+        }
+        this.statusColor = statusColor;
     }
 
     /**
@@ -55,7 +74,6 @@ public class VanishingBlock extends BlockObject {
         if(this.gamePlayManager.getGameObjectManager().getBall().getHitBox().intersects(hitBox)) {
             this.gamePlayManager.bounceBallBack(this);
             this.gamePlayManager.destroyVanishingBlock(this);
-            addPointsToScore();
             System.out.println("Hit_Vanishingblock");
         }
     }
@@ -73,7 +91,6 @@ public class VanishingBlock extends BlockObject {
         }
         else {
             gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
-            addHitBoxToCanvas();
         }
     }
 
@@ -82,10 +99,6 @@ public class VanishingBlock extends BlockObject {
      */
     @Override
     public void updateStatus() {
-    }
-
-    private void addPointsToScore(){
-        this.gamePlayManager.getPlayer().score += 100;
     }
 
     public void setCreateExplosion(boolean createExplosion) {
@@ -104,5 +117,13 @@ public class VanishingBlock extends BlockObject {
         } else {
             return this.gameView.timerExpired("blockExplosion", "VanishingBlock");
         }
+    }
+
+    /**
+     * Get the color of the block
+     * @return
+     */
+    public String getStatusColor() {
+        return String.valueOf(statusColor);
     }
 }

@@ -19,17 +19,17 @@ public class DeadlyBlock extends BlockObject {
     public DeadlyBlock(GameView gameView) {
         super(gameView);
         this.position = new Position(50, 250);
-        this.blockImage = "WWWWWWWWWBB" +
-                "\nWBBBBBBBBBB" +
-                "\nWBWBBBBBBWB" +
-                "\nWBBWBBBBWBB" +
-                "\nWBBBWBBWBBB" +
-                "\nWBBBBWWBBBB" +
-                "\nWBBBBWWBBBB" +
-                "\nWBBBWBBWBBB" +
-                "\nWBBWBBBBWBB" +
-                "\nWBWBBBBBBWB" +
-                "\nWBBBBBBBBBB";
+        this.blockImage = "WWWWWWWWWLL" +
+                "\nWLLLLLLLLLL" +
+                "\nWLWLLLLLLWL" +
+                "\nWLLWLLLLWLL" +
+                "\nWLLLWLLWLLL" +
+                "\nWLLLLWWLLLL" +
+                "\nWLLLLWWLLLL" +
+                "\nWLLLWLLWLLL" +
+                "\nWLLWLLLLWLL" +
+                "\nWLWLLLLLLWL" +
+                "\nWLLLLLLLLLL";
     }
 
     /**
@@ -46,9 +46,12 @@ public class DeadlyBlock extends BlockObject {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        this.gamePlayManager.bounceBallBack(this);
-        loseALife();
-        System.out.println("Hit_Deadlyblock");
+        if(this.gamePlayManager.getGameObjectManager().getBall().getHitBox().intersects(hitBox)) {
+            this.gamePlayManager.bounceBallBack(this);
+            loseALife();
+            this.gameView.playSound("noooh.wav", false);
+            System.out.println("Hit_Deadlyblock");
+        }
     }
 
     /**
@@ -57,7 +60,6 @@ public class DeadlyBlock extends BlockObject {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
-        addHitBoxToCanvas();
     }
 
     /**

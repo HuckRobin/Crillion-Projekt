@@ -5,16 +5,21 @@ import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
+import java.awt.*;
+
 /**
  * Block which changes the Ball color.
  */
 public class ColorChangingBlock extends BlockObject implements Cloneable {
 
+    public enum StatusColor{RED, BLUE, GREEN, YELLOW, PURPLE}
+    private StatusColor statusColor;
+
     /**
      * Create a ColorChangingBlock
      * @param gameView get important Code from GameView
      */
-    public ColorChangingBlock(GameView gameView) {
+    public ColorChangingBlock(GameView gameView, StatusColor statusColor) {
         super(gameView);
         this.position = new Position(50, 100);
         this.blockImage = "WWWWWWWWWBB" +
@@ -28,6 +33,26 @@ public class ColorChangingBlock extends BlockObject implements Cloneable {
                 "\nWBBBBWBBBBB" +
                 "\nWBBBBBBBBBB" +
                 "\nWBBBBBBBBBB";
+        switch (statusColor) {
+            case BLUE:
+                this.blockImage = this.blockImage;
+                break;
+            case RED:
+                this.blockImage = this.blockImage.replace('B','R');
+                break;
+            case GREEN:
+                this.blockImage = this.blockImage.replace('B','G');
+                break;
+            case PURPLE:
+                this.blockImage = this.blockImage.replace('B', 'P');
+                break;
+            case YELLOW:
+                this.blockImage = this.blockImage.replace('B', 'Y');
+                break;
+        }
+        this.statusColor = statusColor;
+
+
     }
 
     /**
@@ -43,7 +68,10 @@ public class ColorChangingBlock extends BlockObject implements Cloneable {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        System.out.println("Hit_ColorChangingBlock");
+        if(this.gamePlayManager.getGameObjectManager().getBall().getHitBox().intersects(hitBox)){
+            this.gamePlayManager.bounceBallBack(this);
+            this.gamePlayManager.changeBallColor(this);
+        }
     }
 
     /**
@@ -52,7 +80,6 @@ public class ColorChangingBlock extends BlockObject implements Cloneable {
     @Override
     public void addToCanvas() {
         gameView.addBlockImageToCanvas(this.blockImage, this.position.x, this.position.y, this.size, this.rotation);
-        addHitBoxToCanvas();
     }
 
     /**
@@ -60,5 +87,13 @@ public class ColorChangingBlock extends BlockObject implements Cloneable {
      */
     @Override
     public void updateStatus() {
+    }
+
+    /**
+     * Get the Color of the Block
+     * @return
+     */
+    public String getStatusColor() {
+        return String.valueOf(statusColor);
     }
 }
