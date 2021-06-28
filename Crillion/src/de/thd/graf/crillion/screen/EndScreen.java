@@ -6,7 +6,7 @@ import de.thd.graf.crillion.gameview.GameView;
  * game.
  */
 public class EndScreen {
-    private GameView gameView;
+    private final GameView gameView;
 
     /**
      * Creates the screen;

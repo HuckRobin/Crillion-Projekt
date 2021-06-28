@@ -2,8 +2,6 @@ package de.thd.graf.crillion.graphics.basicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
 
-import java.awt.*;
-
 /**
  * Superclass for the block objects
  */

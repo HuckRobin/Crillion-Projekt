@@ -4,6 +4,9 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 
+/**
+ * Current score of this game round
+ */
 public class Lives extends ScoreObjects {
 
     /**
@@ -16,8 +19,6 @@ public class Lives extends ScoreObjects {
         this.scoreNum = 0;
         this.name = "Lives:";
     }
-
-    private void addPointsToScore(){}
 
     /**
      * {@inheritDoc}

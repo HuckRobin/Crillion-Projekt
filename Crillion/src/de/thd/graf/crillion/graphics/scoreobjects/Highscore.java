@@ -4,6 +4,9 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 import de.thd.graf.crillion.graphics.basicobjects.ScoreObjects;
 
+/**
+ * Highscore for the game
+ */
 public class Highscore extends ScoreObjects {
     /**
      * Create the Level object
@@ -12,7 +15,7 @@ public class Highscore extends ScoreObjects {
     public Highscore(GameView gameView){
         super(gameView);
         this.position = new Position(GameView.WIDTH, 30);
-        this.scoreNum = 5;
+        this.scoreNum = 0;
         this.name = "Highscore:" + this.scoreNum;
     }
 

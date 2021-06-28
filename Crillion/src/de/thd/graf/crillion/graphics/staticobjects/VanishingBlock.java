@@ -12,7 +12,7 @@ import de.thd.graf.crillion.graphics.dynamicobjects.Ball;
  */
 public class VanishingBlock extends BlockObject {
     public enum StatusColor{RED, BLUE, GREEN, YELLOW, PURPLE}
-    private StatusColor statusColor;
+    private final StatusColor statusColor;
 
     private boolean createExplosion;
     private boolean timerSet;
@@ -20,6 +20,7 @@ public class VanishingBlock extends BlockObject {
     /**
      * Create a VanishingBlock
      * @param gameView get important Code from GameView
+     * @param statusColor in which color the block should be
      */
     public VanishingBlock(GameView gameView, StatusColor statusColor) {
         super(gameView);
@@ -39,7 +40,6 @@ public class VanishingBlock extends BlockObject {
         this.timerSet = false;
         switch (statusColor) {
             case BLUE:
-                this.blockImage = this.blockImage;
                 break;
             case RED:
                 this.blockImage = this.blockImage.replace('B','R');
@@ -101,6 +101,10 @@ public class VanishingBlock extends BlockObject {
     public void updateStatus() {
     }
 
+    /**
+     * Set the explosion status
+     * @param createExplosion Explosin true or false
+     */
     public void setCreateExplosion(boolean createExplosion) {
         this.createExplosion = createExplosion;
     }
@@ -121,7 +125,7 @@ public class VanishingBlock extends BlockObject {
 
     /**
      * Get the color of the block
-     * @return
+     * @return get the color of the block
      */
     public String getStatusColor() {
         return String.valueOf(statusColor);

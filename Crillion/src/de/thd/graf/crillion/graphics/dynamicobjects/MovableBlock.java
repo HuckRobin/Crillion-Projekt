@@ -1,9 +1,10 @@
 package de.thd.graf.crillion.graphics.dynamicobjects;
 
 import de.thd.graf.crillion.gameview.GameView;
-import de.thd.graf.crillion.graphics.basicobjects.*;
-import de.thd.graf.crillion.graphics.staticobjects.ColorChangingBlock;
-import de.thd.graf.crillion.graphics.staticobjects.VanishingBlock;
+import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
+import de.thd.graf.crillion.graphics.basicobjects.CollidingGameObject;
+import de.thd.graf.crillion.graphics.basicobjects.MovingGameObject;
+import de.thd.graf.crillion.graphics.basicobjects.Position;
 
 import java.util.ArrayList;
 
@@ -13,10 +14,14 @@ import java.util.ArrayList;
 public class MovableBlock extends CollidingGameObject implements MovingGameObject {
 
      public enum Direction {STOP, UP, DOWN, LEFT, RIGHT}
+
+    /**
+     * Direction in which the block should move
+     */
      public Direction direction;
 
     public enum StatusColor{RED, BLUE, GREEN, YELLOW, PURPLE}
-    private StatusColor statusColor;
+    private final StatusColor statusColor;
 
      private boolean stopUp;
      private boolean stopDown;
@@ -28,6 +33,8 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
      * Create a MoveableBlock
      *
      * @param gameView get important Code from GameView
+     * @param objectsToCollideWith List of objects where the block can collide with
+     * @param statusColor in which color the block should be
      */
     public MovableBlock(GameView gameView, StatusColor statusColor, ArrayList<CollidableGameObject> objectsToCollideWith) {
         super(gameView, objectsToCollideWith);
@@ -53,7 +60,6 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
 
         switch (statusColor) {
             case BLUE:
-                this.blockImage = this.blockImage;
                 break;
             case RED:
                 this.blockImage = this.blockImage.replace('B','R');
@@ -181,14 +187,6 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
     }
 
     /**
-     * Get the direction of the block
-     * @return direction
-     */
-    public Direction getDirection() {
-        return direction;
-    }
-
-    /**
      * Set the direction of the block
      * @param direction direction
      */
@@ -198,7 +196,7 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
 
     /**
      * Get the color of the block as a String
-     * @return
+     * @return the color of the moveable block
      */
     public String getStatusColor() {
         return String.valueOf(statusColor);

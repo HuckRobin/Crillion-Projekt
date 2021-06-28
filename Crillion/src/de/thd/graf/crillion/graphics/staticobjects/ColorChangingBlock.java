@@ -5,19 +5,18 @@ import de.thd.graf.crillion.graphics.basicobjects.BlockObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
 
-import java.awt.*;
-
 /**
  * Block which changes the Ball color.
  */
 public class ColorChangingBlock extends BlockObject implements Cloneable {
 
     public enum StatusColor{RED, BLUE, GREEN, YELLOW, PURPLE}
-    private StatusColor statusColor;
+    private final StatusColor statusColor;
 
     /**
      * Create a ColorChangingBlock
      * @param gameView get important Code from GameView
+     * @param statusColor in which color the block should be
      */
     public ColorChangingBlock(GameView gameView, StatusColor statusColor) {
         super(gameView);
@@ -35,7 +34,6 @@ public class ColorChangingBlock extends BlockObject implements Cloneable {
                 "\nWBBBBBBBBBB";
         switch (statusColor) {
             case BLUE:
-                this.blockImage = this.blockImage;
                 break;
             case RED:
                 this.blockImage = this.blockImage.replace('B','R');
@@ -91,7 +89,7 @@ public class ColorChangingBlock extends BlockObject implements Cloneable {
 
     /**
      * Get the Color of the Block
-     * @return
+     * @return get the color of the color changing block
      */
     public String getStatusColor() {
         return String.valueOf(statusColor);

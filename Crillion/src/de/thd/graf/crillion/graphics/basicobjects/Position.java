@@ -16,7 +16,7 @@ public final class Position {
     /**
      * creates the positions of the objects
      */
-    public Position(int x, int y) {
+    public Position(double x, double y) {
         this.y = y;
         this.x = x;
     }

@@ -1,7 +1,6 @@
 package de.thd.graf.crillion.game.managers;
 
 import de.thd.graf.crillion.game.utilities.Level;
-import de.thd.graf.crillion.graphics.staticobjects.Background;
 
 import java.util.ArrayList;
 import java.util.List;

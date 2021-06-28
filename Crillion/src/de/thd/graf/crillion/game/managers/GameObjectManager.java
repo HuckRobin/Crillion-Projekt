@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * This class manages the objects
  */
-
 public class GameObjectManager {
 
     private final Background background;
@@ -25,12 +24,13 @@ public class GameObjectManager {
     private final BoundaryBottom boundaryBottom;
     private final BoundaryRight boundaryRight;
     private final Scoreboard scoreboard;
+    private final Overlay overlay;
 
-    private  LinkedList<BlockObject> blockObjects;
+    private final LinkedList<BlockObject> blockObjects;
+    private final LinkedList<GameObject> gameObjects;
 
-    private LinkedList<GameObject> gameObjects;
-    private ArrayList<CollidableGameObject> collidableGameObjectsBall;
-    private ArrayList<CollidableGameObject> collidableGameObjectsMovableBlock;
+    private final ArrayList<CollidableGameObject> collidableGameObjectsBall;
+    private final ArrayList<CollidableGameObject> collidableGameObjectsMovableBlock;
 
 
     GameObjectManager(GameView gameView) {
@@ -40,6 +40,7 @@ public class GameObjectManager {
         this.boundaryLeft = new BoundaryLeft(gameView);
         this.boundaryBottom = new BoundaryBottom(gameView);
         this.boundaryRight = new BoundaryRight(gameView);
+        this.overlay = new Overlay(gameView);
 
 
         this.blockObjects = new LinkedList<>();
@@ -66,6 +67,7 @@ public class GameObjectManager {
         gameObjects.addAll(List.of(boundaryBottom, boundaryTop, boundaryRight, boundaryLeft));
         gameObjects.addAll(blockObjects);
         gameObjects.add(ball);
+        gameObjects.add(overlay);
 
         for (GameObject gameObject : gameObjects) {
             gameObject.update();
@@ -93,7 +95,8 @@ public class GameObjectManager {
 
     /**
      * Get the scoreboard
-     * @return
+     *
+     * @return scoreboard
      */
     public Scoreboard getScoreboard() {
         return scoreboard;
@@ -101,6 +104,7 @@ public class GameObjectManager {
 
     /**
      * Get the Gameobjcts
+     *
      * @return List of gameobjects
      */
     public LinkedList<GameObject> getGameObjects() {
@@ -109,6 +113,7 @@ public class GameObjectManager {
 
     /**
      * Get the collidable game objcts for the ball
+     *
      * @return collidable game objects
      */
     public ArrayList<CollidableGameObject> getCollidableGameObjectsBall() {
@@ -117,9 +122,35 @@ public class GameObjectManager {
 
     /**
      * Get the collidable game objects for the moveable block
-     * @return
+     *
+     * @return List ofgame objects which can collide with movable block
      */
     public ArrayList<CollidableGameObject> getCollidableGameObjectsMovableBlock() {
         return collidableGameObjectsMovableBlock;
+    }
+
+    /**
+     * Get the overlay
+     *
+     * @return the overlay
+     */
+    public Overlay getOverlay() {
+        return overlay;
+    }
+
+    BoundaryTop getBoundaryTop() {
+        return boundaryTop;
+    }
+
+    BoundaryLeft getBoundaryLeft() {
+        return boundaryLeft;
+    }
+
+    BoundaryBottom getBoundaryBottom() {
+        return boundaryBottom;
+    }
+
+    BoundaryRight getBoundaryRight() {
+        return boundaryRight;
     }
 }

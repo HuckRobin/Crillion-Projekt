@@ -31,19 +31,4 @@ public abstract class ScoreObjects extends GameObject{
         this.scoreNum = scoreNum;
     }
 
-    /**
-     * Set the name of the object
-     * @param name name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Get the value of the score
-     * @return scoreNum
-     */
-    public int getScoreNum() {
-        return scoreNum;
-    }
 }

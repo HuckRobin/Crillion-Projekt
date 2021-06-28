@@ -20,10 +20,6 @@ public class Score extends ScoreObjects {
         this.name = "Score:" + this.scoreNum;
     }
 
-    public void addPointsToScore(){
-        this.scoreNum ++;
-    }
-
     /**
      * {@inheritDoc}
      */

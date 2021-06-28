@@ -1,6 +1,5 @@
 package de.thd.graf.crillion.game.utilities;
 
-import de.thd.graf.crillion.graphics.scoreobjects.Score;
 
 /**
  * Represents the player of the game

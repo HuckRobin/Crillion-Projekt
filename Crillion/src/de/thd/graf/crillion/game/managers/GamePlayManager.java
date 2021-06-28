@@ -15,6 +15,7 @@ import de.thd.graf.crillion.screen.EndScreen;
 import de.thd.graf.crillion.screen.StartScreen;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Gameplay Manager controlls the actions in the game
@@ -23,11 +24,9 @@ public class GamePlayManager {
 
     private final GameView gameView;
     private final GameObjectManager gameObjectManager;
-    private LevelManager levelManager;
     private final Player player;
-    private boolean nextLevel;
-    private boolean gameover;
-    private ArrayList<CollidableGameObject> deletObjects;
+    private boolean gameOver;
+    private final ArrayList<CollidableGameObject> deletObjects;
 
 
     GamePlayManager(GameView gameView, GameObjectManager gameObjectManager) {
@@ -36,12 +35,9 @@ public class GamePlayManager {
         this.gameObjectManager = gameObjectManager;
         this.player = new Player();
         this.player.level = new Level(1);
-        this.nextLevel = true;
-        this.gameover = false;
+        this.gameOver = false;
         this.deletObjects = new ArrayList<>();
-        this.levelManager = new LevelManager();
-        StartScreen startScreen = new StartScreen(gameView);
-        startScreen.showStartScreen();
+        initializeGame();
     }
 
     /**
@@ -50,33 +46,48 @@ public class GamePlayManager {
     public void updateGamePlay() {
         updatePlayerLives();
         updateScore();
-        if (nextLevel) {
-            if (!gameover) {
-                createLevel();
-            }
-            if (gameover) {
-                EndScreen endScreen = new EndScreen(gameView);
-                endScreen.showEndScreen(player.score);
-                StartScreen startScreen = new StartScreen(gameView);
-                startScreen.showStartScreen();
-                levelManager = new LevelManager();
-                this.player.lives = Player.MAXIMUM_NUMBER_OF_LIVES;
-                this.player.score = 0;
-                this.gameObjectManager.getBlockObjects().clear();
-                this.gameObjectManager.getCollidableGameObjectsMovableBlock().clear();
-                this.gameObjectManager.getCollidableGameObjectsBall().clear();
-                this.gameObjectManager.getGameObjects().clear();
-                createLevel();
-            }
+        if (this.player.lives == 0 || this.player.level.blocks == 0) {
+            nextGame();
         }
         this.gameObjectManager.getCollidableGameObjectsBall().removeAll(deletObjects);
         this.gameObjectManager.getCollidableGameObjectsMovableBlock().removeAll(deletObjects);
+    }
 
-        if (player.lives == 0 || this.player.level.blocks == 0) {
-            this.gameover = true;
-            this.nextLevel = true;
+
+    private void initializeLevel() {
+        this.gameObjectManager.getBlockObjects().clear();
+        this.gameObjectManager.getCollidableGameObjectsMovableBlock().clear();
+        this.gameObjectManager.getCollidableGameObjectsBall().clear();
+        this.gameObjectManager.getGameObjects().clear();
+        this.gameObjectManager.getCollidableGameObjectsMovableBlock().addAll(List.of(this.gameObjectManager.getBoundaryBottom(), this.gameObjectManager.getBoundaryLeft(), this.gameObjectManager.getBoundaryTop(), this.gameObjectManager.getBoundaryRight()));
+        this.gameObjectManager.getScoreboard().getCurrentLevel().setScoreNum(this.player.level.name);
+        this.gameObjectManager.getBall().getPosition().x = 50;
+        this.gameObjectManager.getBall().getPosition().y = 100;
+        this.gameObjectManager.getBall().setBallColor("RED");
+        createLevel();
+    }
+
+    private void initializeGame() {
+        StartScreen startScreen = new StartScreen(gameView);
+        startScreen.showStartScreen();
+        this.player.lives = Player.MAXIMUM_NUMBER_OF_LIVES;
+        this.player.score = 0;
+        initializeLevel();
+    }
+
+    private void nextGame() {
+        if (!gameOver) {
+            gameView.setTimer("game", "GamePlayManager", 3000);
+            gameOver = true;
+            gameObjectManager.getOverlay().showMessage("Game Over!");
         }
-
+        if (gameView.timerExpired("game", "GamePlayManager")) {
+            gameOver = false;
+            gameView.stopAllSounds();
+            EndScreen endScreen = new EndScreen(gameView);
+            endScreen.showEndScreen(player.score);
+            initializeGame();
+        }
     }
 
     /**
@@ -85,14 +96,16 @@ public class GamePlayManager {
      * @param vanishingBlock Object to be removed from the window.
      */
     public void destroyVanishingBlock(VanishingBlock vanishingBlock) {
-        if (this.gameObjectManager.getBall().getBallColor() == vanishingBlock.getStatusColor()) {
-            if (this.gameObjectManager.getBall().getHitBox().intersects(vanishingBlock.getHitBox())) {
-                this.deletObjects.add(vanishingBlock);
+        if (!gameOver) {
+            if (this.gameObjectManager.getBall().getBallColor().equals(vanishingBlock.getStatusColor())) {
+                if (this.gameObjectManager.getBall().getHitBox().intersects(vanishingBlock.getHitBox())) {
+                    this.deletObjects.add(vanishingBlock);
+                }
+                vanishingBlock.setCreateExplosion(true);
+                this.gameView.playSound("explosion.wav", false);
+                this.player.score += 100;
+                this.player.level.blocks--;
             }
-            vanishingBlock.setCreateExplosion(true);
-            this.gameView.playSound("explosion.wav", false);
-            this.player.score += 100;
-            this.player.level.blocks--;
         }
     }
 
@@ -127,8 +140,8 @@ public class GamePlayManager {
      */
     public void moveBlock(MovableBlock movableBlock, CollidableGameObject collidableGameObject) {
 
-        if (this.gameObjectManager.getBall().getBallColor() == movableBlock.getStatusColor()) {
-            //Links
+        if (this.gameObjectManager.getBall().getBallColor().equals(movableBlock.getStatusColor())) {
+            //Ball trifft linke Seite
             if (this.gameObjectManager.getBall().getHitBox().intersectsLine(movableBlock.getPosition().x, movableBlock.getPosition().y, movableBlock.getPosition().x, movableBlock.getPosition().y + movableBlock.getHeight())
                     && !collidableGameObject.getHitBox().intersectsLine(movableBlock.getPosition().x + movableBlock.getWidth(), movableBlock.getPosition().y + 2, movableBlock.getPosition().x + movableBlock.getWidth(), movableBlock.getPosition().y + movableBlock.getHeight() - 2)) {
                 movableBlock.setDirection(MovableBlock.Direction.RIGHT);
@@ -154,9 +167,7 @@ public class GamePlayManager {
     }
 
     private void createLevel() {
-        this.gameObjectManager.getScoreboard().getCurrentLevel().setScoreNum(this.player.level.name);
-        this.gameObjectManager.getBall().getPosition().x = 50;
-        this.gameObjectManager.getBall().getPosition().y = 100;
+
         for (Position position : this.player.level.getBlockPositionForTheLevel("VanishingBlock_Blue", this.player.level.name)) {
             VanishingBlock vanishingBlock = new VanishingBlock(gameView, VanishingBlock.StatusColor.BLUE);
             helpFunctionCreateLevel(vanishingBlock, position);
@@ -164,11 +175,6 @@ public class GamePlayManager {
         }
         for (Position position : this.player.level.getBlockPositionForTheLevel("VanishingBlock_Red", this.player.level.name)) {
             VanishingBlock vanishingBlock = new VanishingBlock(gameView, VanishingBlock.StatusColor.RED);
-            helpFunctionCreateLevel(vanishingBlock, position);
-            this.gameObjectManager.getCollidableGameObjectsMovableBlock().add(vanishingBlock);
-        }
-        for (Position position : this.player.level.getBlockPositionForTheLevel("VanishingBlock_Yellow", this.player.level.name)) {
-            VanishingBlock vanishingBlock = new VanishingBlock(gameView, VanishingBlock.StatusColor.YELLOW);
             helpFunctionCreateLevel(vanishingBlock, position);
             this.gameObjectManager.getCollidableGameObjectsMovableBlock().add(vanishingBlock);
         }
@@ -187,11 +193,6 @@ public class GamePlayManager {
             helpFunctionCreateLevel(colorChangingBlock, position);
             this.gameObjectManager.getCollidableGameObjectsMovableBlock().add(colorChangingBlock);
         }
-        for (Position position : this.player.level.getBlockPositionForTheLevel("ColorChangingBlock_Yellow", this.player.level.name)) {
-            ColorChangingBlock colorChangingBlock = new ColorChangingBlock(gameView, ColorChangingBlock.StatusColor.YELLOW);
-            helpFunctionCreateLevel(colorChangingBlock, position);
-            this.gameObjectManager.getCollidableGameObjectsMovableBlock().add(colorChangingBlock);
-        }
         for (Position position : this.player.level.getBlockPositionForTheLevel("DeadlyBlock", this.player.level.name)) {
             DeadlyBlock deadlyBlock = new DeadlyBlock(gameView);
             helpFunctionCreateLevel(deadlyBlock, position);
@@ -205,16 +206,6 @@ public class GamePlayManager {
             MovableBlock movableBlock = new MovableBlock(gameView, MovableBlock.StatusColor.RED, this.gameObjectManager.getCollidableGameObjectsMovableBlock());
             helpFunctionCreateLevel(movableBlock, position);
         }
-        this.nextLevel = false;
-    }
-
-    /**
-     * Change the color of the ball
-     *
-     * @param colorChangingBlock
-     */
-    public void changeBallColor(ColorChangingBlock colorChangingBlock) {
-        this.gameObjectManager.getBall().setStatusColor(colorChangingBlock.getStatusColor());
     }
 
     private void updatePlayerLives() {
@@ -230,15 +221,6 @@ public class GamePlayManager {
         }
     }
 
-    /**
-     * Get the player
-     *
-     * @return
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
     private void helpFunctionCreateLevel(BlockObject blockObject, Position position) {
         blockObject.getPosition().x = position.x;
         blockObject.getPosition().y = position.y;
@@ -248,9 +230,29 @@ public class GamePlayManager {
     }
 
     /**
+     * Change the color of the ball
+     *
+     * @param colorChangingBlock color changing block
+     */
+    public void changeBallColor(ColorChangingBlock colorChangingBlock) {
+        this.gameObjectManager.getBall().setBallColor(colorChangingBlock.getStatusColor());
+    }
+
+
+    /**
+     * Get the player
+     *
+     * @return player
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+
+    /**
      * Get the gameobject Manager
      *
-     * @return
+     * @return objectmanager
      */
     public GameObjectManager getGameObjectManager() {
         return gameObjectManager;

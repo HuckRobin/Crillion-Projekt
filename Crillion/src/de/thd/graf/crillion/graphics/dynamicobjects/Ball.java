@@ -4,7 +4,10 @@ import de.thd.graf.crillion.gameview.GameView;
 import de.thd.graf.crillion.graphics.basicobjects.CollidableGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.CollidingGameObject;
 import de.thd.graf.crillion.graphics.basicobjects.Position;
-import de.thd.graf.crillion.graphics.staticobjects.*;
+import de.thd.graf.crillion.graphics.staticobjects.BoundaryBottom;
+import de.thd.graf.crillion.graphics.staticobjects.BoundaryLeft;
+import de.thd.graf.crillion.graphics.staticobjects.BoundaryRight;
+import de.thd.graf.crillion.graphics.staticobjects.BoundaryTop;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
  */
 public class Ball extends CollidingGameObject {
     public enum StatusColor {RED, BLUE, GREEN, YELLOW, PURPLE}
+
     private StatusColor statusColor;
 
     private String ballImage;
@@ -42,10 +46,11 @@ public class Ball extends CollidingGameObject {
      *
      * @param gameView             get important Code from GameView
      * @param objectsToCollideWith Game objects this game object can collide with.
+     * @param @param               objectsToCollideWith List of objects where the ball can collide with
      */
     public Ball(GameView gameView, StatusColor statusColor, ArrayList<CollidableGameObject> objectsToCollideWith) {
         super(gameView, objectsToCollideWith);
-        this.position = new Position(GameView.WIDTH / 2, GameView.HEIGHT / 2);
+        this.position = new Position(GameView.WIDTH / 2d, GameView.HEIGHT / 2d);
         this.shooting = false;
         this.speedInPixel = 2;
         this.size = 1.25;
@@ -201,7 +206,6 @@ public class Ball extends CollidingGameObject {
     }
 
 
-
     /**
      * @param changeDirectionTopToBottom boolean changeDirectionTopToBottom
      */
@@ -247,7 +251,8 @@ public class Ball extends CollidingGameObject {
 
     /**
      * Get the Color of the ball
-     * @return
+     *
+     * @return Color of the Ball
      */
     public String getBallColor() {
         return String.valueOf(statusColor);
@@ -255,10 +260,11 @@ public class Ball extends CollidingGameObject {
 
     /**
      * Set the ball color
-     * @param statusColor
+     *
+     * @param BallColor set Color of the Ball
      */
-    public void setStatusColor(String statusColor) {
-        switch (statusColor) {
+    public void setBallColor(String BallColor) {
+        switch (BallColor) {
             case "BLUE":
                 this.statusColor = StatusColor.BLUE;
                 this.ballImage = "Blue-Ball.png";
