@@ -46,7 +46,7 @@ public class GamePlayManager {
     public void updateGamePlay() {
         updatePlayerLives();
         updateScore();
-        if (this.player.lives == 0 || this.player.level.blocks == 0) {
+        if (this.player.lives <= 0 || this.player.level.blocks == 0) {
             nextGame();
         }
         this.gameObjectManager.getCollidableGameObjectsBall().removeAll(deletObjects);
@@ -59,6 +59,7 @@ public class GamePlayManager {
         this.gameObjectManager.getCollidableGameObjectsMovableBlock().clear();
         this.gameObjectManager.getCollidableGameObjectsBall().clear();
         this.gameObjectManager.getGameObjects().clear();
+        this.player.level.blocks = 0;
         this.gameObjectManager.getCollidableGameObjectsMovableBlock().addAll(List.of(this.gameObjectManager.getBoundaryBottom(), this.gameObjectManager.getBoundaryLeft(), this.gameObjectManager.getBoundaryTop(), this.gameObjectManager.getBoundaryRight()));
         this.gameObjectManager.getScoreboard().getCurrentLevel().setScoreNum(this.player.level.name);
         this.gameObjectManager.getBall().getPosition().x = 50;

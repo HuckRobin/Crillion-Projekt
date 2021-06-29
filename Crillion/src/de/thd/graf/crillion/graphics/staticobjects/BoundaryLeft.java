@@ -40,7 +40,6 @@ public class BoundaryLeft extends BoundaryObjects {
     @Override
     public void addToCanvas() {
         gameView.addRectangleToCanvas(this.position.x, this.position.y, this.width, this.height, 1, true, Color.WHITE);
-        gameView.addRectangleToCanvas(this.hitBox.x, this.hitBox.y, this.hitBox.width, this.hitBox.height, 1, false, Color.RED);
     }
 
     /**
@@ -56,6 +55,5 @@ public class BoundaryLeft extends BoundaryObjects {
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        System.out.println("Hit_Left");
     }
 }

@@ -9,7 +9,6 @@ import de.thd.graf.crillion.graphics.staticobjects.BoundaryLeft;
 import de.thd.graf.crillion.graphics.staticobjects.BoundaryRight;
 import de.thd.graf.crillion.graphics.staticobjects.BoundaryTop;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +20,6 @@ public class Ball extends CollidingGameObject {
     private StatusColor statusColor;
 
     private String ballImage;
-    private boolean shooting;
     private boolean changeDirectionTopToBottom;
     private final BoundaryLeft boundaryLeft;
     private final BoundaryRight boundaryRight;
@@ -36,22 +34,17 @@ public class Ball extends CollidingGameObject {
      * Constant to activate diagonal movement
      */
     public final static boolean DIAGONAL_MOVEMENT = true;
-    /**
-     * Constant to change player object
-     */
-    public final static boolean PLAYER_GRAPHIC = true;
 
     /**
      * Create the PlayerObject
      *
      * @param gameView             get important Code from GameView
      * @param objectsToCollideWith Game objects this game object can collide with.
-     * @param @param               objectsToCollideWith List of objects where the ball can collide with
+     * @param statusColor           Color of the ball
      */
     public Ball(GameView gameView, StatusColor statusColor, ArrayList<CollidableGameObject> objectsToCollideWith) {
         super(gameView, objectsToCollideWith);
         this.position = new Position(GameView.WIDTH / 2d, GameView.HEIGHT / 2d);
-        this.shooting = false;
         this.speedInPixel = 2;
         this.size = 1.25;
         this.width = 11 * (int) size;
@@ -153,13 +146,6 @@ public class Ball extends CollidingGameObject {
      */
     @Override
     public void addToCanvas() {
-        if (!PLAYER_GRAPHIC) {
-            if (shooting) {
-                gameView.addTextToCanvas("O", this.position.x, this.position.y, this.size, Color.WHITE, this.rotation);
-                shooting = false;
-            } else
-                gameView.addTextToCanvas("X", this.position.x, this.position.y, this.size, Color.WHITE, this.rotation);
-        } else
             gameView.addImageToCanvas(this.ballImage, this.position.x, this.position.y, this.size, this.rotation);
     }
 

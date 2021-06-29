@@ -91,7 +91,6 @@ public class MovableBlock extends CollidingGameObject implements MovingGameObjec
      */
     @Override
     public void reactToCollision(CollidableGameObject otherObject) {
-        System.out.println("Hit_MovableBlock");
         this.gamePlayManager.bounceBallBack(this);
         hitAObject(otherObject);
         if(otherObject.getClass() != this.getClass()){
