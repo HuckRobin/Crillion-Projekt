@@ -50,7 +50,6 @@ public class DeadlyBlock extends BlockObject {
             this.gamePlayManager.bounceBallBack(this);
             loseALife();
             this.gameView.playSound("noooh.wav", false);
-            System.out.println("Hit_Deadlyblock");
         }
     }
 

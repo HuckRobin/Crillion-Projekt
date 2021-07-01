@@ -74,7 +74,6 @@ public class VanishingBlock extends BlockObject {
         if(this.gamePlayManager.getGameObjectManager().getBall().getHitBox().intersects(hitBox)) {
             this.gamePlayManager.bounceBallBack(this);
             this.gamePlayManager.destroyVanishingBlock(this);
-            System.out.println("Hit_Vanishingblock");
         }
     }
 

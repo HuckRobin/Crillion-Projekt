@@ -46,7 +46,6 @@ public class WallBlock extends BlockObject {
     public void reactToCollision(CollidableGameObject otherObject) {
         if(this.gamePlayManager.getGameObjectManager().getBall().getHitBox().intersects(hitBox)) {
             this.gamePlayManager.bounceBallBack(this);
-            System.out.println("Hit_Wallblock");
         }
     }
 
