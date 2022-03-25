@@ -1,3 +1,3 @@
 # Crillion-Projekt
 Programmieren 2
-Study project. Programming a lil game in Java.
+Study project. Programming a littel game in Java.
