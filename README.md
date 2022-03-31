@@ -1,6 +1,6 @@
 # Crillion-Projekt
-This was a java project for the course "Programming 2" for my studies in 2021.
+This was a Java project for the course "Programming 2" for my studies in 2021.
 
-You controll the ball with your keyboard (LEFT and RIGHT Keys). The aim is to destroy all the colored blocks. Avoid the black one with skull on it! 
+You control the ball with the keyboard (LEFT and RIGHT keys). The goal is to destroy all the colored blocks. Avoid the black ones!
 
-Have fun to play it!
+Have fun playing the game!
